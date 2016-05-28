@@ -15491,7 +15491,7 @@ $pyjs['loaded_modules']['piscorebeta'] = function (__mod_name__) {
 	$m['toScreen'] = function(N, line_size, line_num) {
 		var $iter5_nextval,$iter5_idx,nums,$iter5_array,$add14,$add15,$add16,$iter5_iter,numbers,text_width,$add13,y,x,text_height,$iter5_type,row;
 		text_height = 60;
-		text_width = 140;
+		text_width = 150;
 		nums = $m['Matrixform'](N, line_size, line_num);
 		y = 30;
 		x = $p['__op_add']($add13=text_width,$add14=40);
@@ -15509,8 +15509,22 @@ $pyjs['loaded_modules']['piscorebeta'] = function (__mod_name__) {
 
 	$m['toScreen']['__bind_type__'] = 0;
 	$m['toScreen']['__args__'] = [null,null,['N'],['line_size'],['line_num']];
+	$m['restart'] = function() {
+		var linefirst,key1,$add17,$add18,key2;
+		$m['screen']['blit']((typeof background == "undefined"?$m['background']:background), $p['tuple']([0, 0]));
+		linefirst = $m['write']($p['__op_add']($add17=$p['chr'](960),$add18='=3.'), (typeof fontObj == "undefined"?$m['fontObj']:fontObj));
+		$m['screen']['blit'](linefirst, $p['tuple']([(typeof x == "undefined"?$m['x']:x), (typeof y == "undefined"?$m['y']:y)]));
+		$m['n']['setCount'](1);
+		key1 = $p['getattr']($m['Digit']($m['n']['getCount']()), 'key');
+		key2 = $p['getattr']($m['Digit']($m['n']['getCount']()), 'key_num');
+		return null;
+	};
+	$m['restart']['__name__'] = 'restart';
+
+	$m['restart']['__bind_type__'] = 0;
+	$m['restart']['__args__'] = [null,null];
 	$m['setup'] = function() {
-		var x,y,font_size,font_colour,clock,text,screen,background,linefirst,$add17,bg_col,font_path,mainloop,FPS,$div3,font,$add18,textpos,$div4;
+		var font_size,font_colour,clock,text,screen,background,linefirst,$add19,bg_col,$add20,font_path,mainloop,FPS,$div3,font,textpos,$div4;
 		$m['pygame']['init']();
 		screen = $m['pygame']['display']['set_mode']($p['tuple']([470, 500]));
 		$m['pygame']['display']['set_caption']('PiScore');
@@ -15536,10 +15550,10 @@ $pyjs['loaded_modules']['piscorebeta'] = function (__mod_name__) {
 		FPS = 60;
 		$m['n'] = $m['Counter']();
 		$m['n']['setCount'](1);
-		x = 40;
-		y = 30;
-		linefirst = $m['write']($p['__op_add']($add17=$p['chr'](960),$add18='=3.'), $m['fontObj']);
-		screen['blit'](linefirst, $p['tuple']([x, y]));
+		$m['x'] = 40;
+		$m['y'] = 30;
+		linefirst = $m['write']($p['__op_add']($add19=$p['chr'](960),$add20='=3.'), $m['fontObj']);
+		screen['blit'](linefirst, $p['tuple']([$m['x'], $m['y']]));
 		return $p['tuple']([screen, background, $m['fontObj'], $m['n']]);
 	};
 	$m['setup']['__name__'] = 'setup';
@@ -15547,7 +15561,7 @@ $pyjs['loaded_modules']['piscorebeta'] = function (__mod_name__) {
 	$m['setup']['__bind_type__'] = 0;
 	$m['setup']['__args__'] = [null,null];
 	$m['run'] = function() {
-		var line_len,$or1,$iter6_idx,line_num,$iter6_type,key2,key1,$or2,$iter6_array,mainloop,$mul6,$iter6_iter,$mul5,event,$iter6_nextval;
+		var line_len,$or1,$iter6_idx,line_num,$iter6_type,key2,key1,$or2,$iter6_array,$mul6,$iter6_iter,$mul5,event,$iter6_nextval;
 		line_len = 5;
 		line_num = 4;
 		key1 = $p['getattr']($m['Digit']($m['n']['getCount']()), 'key');
@@ -15558,7 +15572,7 @@ $pyjs['loaded_modules']['piscorebeta'] = function (__mod_name__) {
 			event = $iter6_nextval['$nextval'];
 			if ($p['bool']($p['op_eq']($p['getattr'](event, 'type'), $p['getattr']($m['pygame'], 'KEYUP')))) {
 				if ($p['bool']($p['op_eq']($p['getattr'](event, 'key'), $p['getattr']($m['pygame'], 'K_ESCAPE')))) {
-					mainloop = false;
+					$m['restart']();
 				}
 				else if ($p['bool'](($p['bool']($or1=$p['op_eq']($p['getattr'](event, 'key'), key1))?$or1:$p['op_eq']($p['getattr'](event, 'key'), key2)))) {
 					if ($p['bool'](($p['cmp']($m['n']['getCount'](), (typeof ($mul5=line_num)==typeof ($mul6=line_len) && typeof $mul5=='number'?
@@ -15572,6 +15586,9 @@ $pyjs['loaded_modules']['piscorebeta'] = function (__mod_name__) {
 						$m['toScreen']($m['n']['getCount'](), line_len, line_num);
 						$m['n']['incCount']();
 					}
+				}
+				else {
+					$m['restart']();
 				}
 			}
 		}
