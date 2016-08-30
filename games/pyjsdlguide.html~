@@ -98,14 +98,14 @@ A simple game may consist of s parts: a set up and a loop.<br>
 The set up stage defines things like the screen, background and any objects/sprites in the game<br>
 The loop stage listens for user interaction with the game and responds accordingly </p>
 
-<p>In the <a href="./blocky/blockyPy.html">Blocky example</a> the setup()
+<p>In the <a href="http://www.bearums.com/games/blocky/blockyPy.html">Blocky example</a> the setup()
  and run(screen, background, blocksurface) functions setup the game and react to user input respectively.</p>
  
  <p>Once you have a working python pygame, in order to compile it to javascript, you must modify your game.<br>
  Firstly swap out the line "import pygame" for "import pyjsdl as pygame". <br>
  Secondly the run function needs to be changed to exclude the while loop. Instead the line pygame.display.setup(run) 
  causes a looped execution of the run function.<br>
-  For an example of a modified python game see<a href="./blocky/blockyPyjsdl.html">Blocky for pyjs</a>  </p>
+  For an example of a modified python game see<a href="./games/blocky/blockyPyjsdl.html">Blocky for pyjs</a>  </p>
 
 <p>Once you've modified your game you can compile the javascript files in exactly the same manner as with the examples previously.<br>
 Just don't forget to put the pyjsdl module into the same directory as your game!</p>
