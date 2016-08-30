@@ -3,7 +3,6 @@
 git add --all
 
 git commit -m "Initial commit"
-echo "bearums"
 
 git push -u origin master
 
