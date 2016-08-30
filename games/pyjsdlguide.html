@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+
+      <style type='text/css'>
+      div {
+      width: 400px;
+      
+      background-color: black;
+      font-style: italic;
+		font-size:18px;
+		color: green;
+		
+		
+    }
+    a {
+   	color: yellow;
+		
+		}
+		  #terminal {
+		   
+			padding: 6px 10px;
+			}
+			
+		
+		</style>
+</head>
+<body>
+
+<p>The following set of linux terminal commands will set up everything you need to convert pygame
+games to javascript for deployment on the web. <br>If you haven't got linux, it's easy to make a bootable usb for Ubuntu and will
+make your life much easier!  </p>
+<h2> Step 0: Install Pygame</h2>
+<p>I'm guessing you've already got pygame installed but if you haven't, fire up a terminal and write:</p>
+<div><p id="terminal">sudo apt-get install python-pygame</p></div>
+
+<h2> Step 1: Install PyJs</h2>
+<p>First you need to install git. This is easy to do in the terminal by typing:</p>
+
+<div><p id="terminal">sudo apt-get install git-core</p></div>
+
+<p>Next you download the Pyjs module into the current directory with</p>
+<div><p id="terminal">git clone https://github.com/pyjs/pyjs.git</p> </div>
+
+<p>change directories to where the module is downloaded and install:</p>
+<div><p id="terminal">cd pyjs <br> python setup.py install</p></div>
+
+
+
+<p>That's it! Pyjs is installed. To check it's all worked OK, start up Python in the terminal and import pyjs</p>
+<div><p id="terminal">python
+ <br>import pyjs</p></div>
+
+
+<p>If nothing happens, then Pyjs is correctly installed</p>
+
+<p>Let's try some examples! </p>
+
+<p>Move into the examples directory within pyjs (you should already be there).<br>
+My favourite example is asteroids, so we'll play asteroids</p>
+
+<div><p id="terminal">cd examples/asteroids</p> </div>
+
+<p>Next we need to build the javascript:</p>
+<div><p id="terminal">pyjsbuild space.py</p> </div>
+
+<p>This will make a folder called output with a couple of different .html files. <br>
+Open up the space.html file and see how far you can get! </p>
+
+<p>If something went wrong somewhere along the line, take a look at the <a href="https://github.com/pyjs/pyjs/wiki">pyjs wiki</a> </p>
+
+<h2> Step 2: Install PyJsdl</h2>
+<p>This bit is much simpler. Basically all that needs to be done is download the pyjsdl module into where your game is.
+<br> It is crucial that the pyjsdl module is in the same directory as your python game that you want to put on the web.
+<br> For example I will have my game in /home/usr/games/pyjsdl_examples</p>
+
+<p>Installation can be done by heading to the pyjsdl website, downloading the .zip file and unpacking it into the pyjsdl_examples directory.
+<br> Or you can do it all in the terminal:</p>
+
+
+
+<div><p id="terminal">cd /home/usr/games/pyjsdl_examples <br>wget "s3.gatc.ca/files/Pyjsdl_0.21.zip" <br>
+unzip Pyjsdl_0.21.zip</p> </div>
+
+<p>Now let's run a little test. There is a demo on the pyjsdl site called Serpent Duel. <br>
+All that needs to be done is to unzip this python file into /home/usr/games/pyjsdl_examples. <br>
+The file can be found  at <a href="http://s3.gatc.ca/files/Pyjsdl_App.zip">s3.gatc.ca/files/Pyjsdl_App.zip</a>. <br>
+Again the .html page is compiled with the command "pyjsbuild serpentduel.py" and is in the output folder. <br>
+Quite easy eh?
+ </p>
+
+<h2> Step 3: Modifying your Python Game</h2>
+<p>This is by far the hardest part of putting a pygame game on the web.<br>
+A simple game may consist of s parts: a set up and a loop.<br>
+The set up stage defines things like the screen, background and any objects/sprites in the game<br>
+The loop stage listens for user interaction with the game and responds accordingly </p>
+
+<p>In the <a href="http://www.bearums.com/games/blocky/blockyPy.html">Blocky example</a> the setup()
+ and run(screen, background, blocksurface) functions setup the game and react to user input respectively.</p>
+ 
+ <p>Once you have a working python pygame, in order to compile it to javascript, you must modify your game.<br>
+ Firstly swap out the line "import pygame" for "import pyjsdl as pygame". <br>
+ Secondly the run function needs to be changed to exclude the while loop. Instead the line pygame.display.setup(run) 
+ causes a looped execution of the run function.<br>
+  For an example of a modified python game see<a href="http://www.bearums.com/games/blocky/blockyPyjsdl.html">Blocky for pyjs</a>  </p>
+
+<p>Once you've modified your game you can compile the javascript files in exactly the same manner as with the examples previously.<br>
+Just don't forget to put the pyjsdl module into the same directory as your game!</p>
+</body>
+</html>
