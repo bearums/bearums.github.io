@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   
+      <script type="text/javascript">
+         
+            function setAlan(){
+             var txt= "http://bearums.com/sounds/likeThat-AP.mp3"
+             //document.write(txt);
+             localStorage.setItem("name",txt);
+            location.href='yrk.html'
+            
+            }
+            function setFred(){
+             var txt= "http://bearums.com/sounds/likeThat-FD.mp3"
+             //document.write(txt);
+             localStorage.setItem("name",txt);
+            location.href='yrk.html'
+            // location.href='index.html'
+            }
+      </script>
+      
+      <style type='text/css'>
+		input.buttonFormat {
+    		width:70px;
+    		height:70px; 
+    		font-size:20px /* Apply to input tags with class "small" */
+			}
+		</style>
+   </head>
+   <body style="background:black";>
+   <div style="text-align:center">  
+      <p style="color:white ; "><font size="5"> Set volume to <b>11</b> and choose one: </font></p>
+      
+      <form>
+         <input class="buttonFormat" type="button" value="Fred" onclick="setFred();" width="20" height="20" />
+         
+         <input class="buttonFormat" type="button" value="Alan" onclick="setAlan();" />
+<!--<input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">-->
+      </form>
+      </div>
+   </body>
+</html>
