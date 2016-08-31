@@ -81,9 +81,9 @@ onmouseout="this.src='./pictures/littleme.JPG';"></a>
 <!-- camera link 5 -->
 <a href="./Games.html">
 <img  class="tileSize"
-src="./pictures/tv.jpg" style="position: absolute; top: 52px; left: 538.5px; " 
-onmouseover="this.src='./pictures/tv.jpg';" 
-onmouseout="this.src='./pictures/tv.jpg';"></a>
+src="./pictures/greensq.jpg" style="position: absolute; top: 52px; left: 538.5px; " 
+onmouseover="this.src='./pictures/M104_comppressed.jpg';" 
+onmouseout="this.src='./pictures/M104_cBW.jpg';"></a>
 
 
 <!-- bear central tile -->
