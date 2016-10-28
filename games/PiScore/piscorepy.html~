@@ -132,11 +132,11 @@ def toString( Matrix_row):
 
 
 def write(msg,fontObj):
-	#global fontObj
-	fontCol=(99,99,99)
-	mytext = fontObj.render(msg, True,fontCol )
-	mytext = mytext.convert_alpha()
-	return mytext
+        #global fontObj
+        fontCol=(99,99,99)
+        mytext = fontObj.render(msg, True,fontCol )
+        mytext = mytext.convert_alpha()
+        return mytext
 
 def writeRed(msg,fontObj):
     #global fontObj
@@ -146,27 +146,27 @@ def writeRed(msg,fontObj):
     return mytext
 
 def toScreen(N, line_size, line_num,redLastNum):
-    num_width, num_height = fontObj.size(("8"))
-    text_height=60
-    text_width=118
-    nums=(Matrixform(N,line_size,line_num))
-    
-    
-    
-    last_txt=writeRed((str(Digit(N+1).val)), fontObj)
-    y=30
-    x=text_width+40
-    for row in nums:
-    
-        numbers=write(toString(row),fontObj)
-        screen.blit(numbers, (x,y))
-        y=y+text_height
-     
-    if redLastNum==True:#pygame.display.flip()
-        w,h=fontObj.size(str(nums[len(nums)-1]))             
-        screen.blit(last_txt, (x+num_width*len(nums[-1]),y-text_height))
-        #screen.blit(last_txt, (w+x,y-text_height))
-    
+            num_width, num_height = fontObj.size(("8"))
+            text_height=60
+            text_width=118
+            nums=(Matrixform(N,line_size,line_num))
+            
+            
+            
+            last_txt=writeRed((str(Digit(N+1).val)), fontObj)
+            y=30
+            x=text_width+40
+            for row in nums:
+            
+                numbers=write(toString(row),fontObj)
+                screen.blit(numbers, (x,y))
+                y=y+text_height
+             
+            if redLastNum==True:#pygame.display.flip()
+                w,h=fontObj.size(str(nums[len(nums)-1]))             
+                screen.blit(last_txt, (x+num_width*len(nums[-1]),y-text_height))
+                #screen.blit(last_txt, (w+x,y-text_height))
+            
 def gameOver(finalScore):
     toScreen(finalScore, line_len, line_num,True)
     pygame.display.flip()
