@@ -1,0 +1,9 @@
+.og-grid li > a,
+.og-grid li > a img {
+	border: none;
+	outline: none;
+	display: block;
+	position: relative;
+	border-radius : 5%;
+    padding : 0.5px;
+}

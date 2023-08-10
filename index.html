@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 	<head>
 			<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,11 +13,15 @@
 		<style>
 		body {
 		background: #f9f9f9;
-		color: ;
+		color: #f54e42;
 		}
+		
 		</style>
-		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/default.css" />
-		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/component.css" />
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/default_.css" />
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/component_.css" />
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/gallery.css" />
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/grid.css" />
+
 		
 		<script src="http://rdspt.com/js/modernizr.custom.js"></script>
 
@@ -37,24 +41,38 @@ if (!doNotTrack) {
 	</head>
 	<body>
 		<div class="container">	
-							<header class="clearfix">
-				<h1>ReDSPoT<span>I make bike bags and other useful things</span></h1>
-			</header>
+				<header class="clearfix">
+    <h1>ReDSPoT<span>I make bike bags and other useful things</span></h1>
+
+
+
+
+  
+    <nav aria-label="">
+      <ul>
+        
+          <li class="headerList">
+            <a class="btn" href="/about/">About </a>
+          </li>
+        
+          <li class="headerList">
+            <a class="btn" href="/bikebags/">Bike Bags </a>
+          </li>
+        
+      </ul>
+    </nav>
+  
+
+
+
+</header>
+
 			<div class="main">
 				<ul id="og-grid" class="og-grid">
 					
 					<li>
-						<a href="https://github.com/aerohub/hugrid" data-largesrc="images/full/saddlebag/c.jpg" data-title="Saddlebag" data-description="A simple grid theme for Hugo. A kind of boilerplate to perform anyone or anything quickly. Portfolio, collection, bookmarks, contacts and so on." data-buttontext="cccc">
+						<a href="a" data-largesrc="images/full/saddlebag/c.jpg" data-title="Saddlebag" data-description="A simple grid theme for Hugo. A kind of boilerplate to perform anyone or anything quickly. Portfolio, collection, bookmarks, contacts and so on." data-buttontext="cccc">
 							
-
-
-
-
-
-
-
-
-
 
 
 
@@ -74,7 +92,7 @@ if (!doNotTrack) {
       
     
     
-    <img src="/images/full/saddlebag/c_hu11ab08dd4cf601012406296bd6e3d87d_228818_300x300_fill_q75_box_center.jpg" width="300" height="300" style=""  />
+    <img  src="/images/full/saddlebag/c_hu11ab08dd4cf601012406296bd6e3d87d_228818_300x300_fill_q75_box_center.jpg" width="300" height="300"   />
 
 
 
@@ -82,7 +100,6 @@ if (!doNotTrack) {
 
 
 						</a>
-						
 					</li>
 					
 					<li>
@@ -103,20 +120,11 @@ if (!doNotTrack) {
 
 
 
-
-
-
-
-
-
-
-
-
     
       
     
     
-    <img src="/images/full/stembag/a_hu3550ec8735f1fc21f1d66cf8c10e41bd_305545_300x300_fill_q75_box_bottom.jpg" width="300" height="300" style=""  />
+    <img  src="/images/full/stembag/a_hu3550ec8735f1fc21f1d66cf8c10e41bd_305545_300x300_fill_q75_box_bottom.jpg" width="300" height="300"   />
 
 
 
@@ -124,7 +132,6 @@ if (!doNotTrack) {
 
 
 						</a>
-						
 					</li>
 					
 				</ul>
@@ -404,7 +411,7 @@ if (!doNotTrack) {
 					create : function() {
 						this.$title = $( '<h3></h3>' );
 						this.$description = $( '<p></p>' );
-						this.$href = $( '<a href="#">Get the theme</a>' );
+						this.$href = $( '<a href="#">More here</a>' );
 						this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 						this.$loading = $( '<div class="og-loading"></div>' );
 						this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
@@ -443,7 +450,7 @@ if (!doNotTrack) {
 						this.$title.html( eldata.title );
 						this.$description.html( eldata.description );
 						if(eldata.buttontext) this.$href.text(eldata.buttontext);
-						else this.$href.text("Get the theme")
+						else this.$href.text("More here")
 
 						if (eldata.href) {
 							this.$href.attr( 'href', eldata.href );
