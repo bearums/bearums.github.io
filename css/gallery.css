@@ -1,6 +1,6 @@
 .gallery{
     display : inline-block;
      width : 19%;
-     border-radius : 5%;
-     border: 5px solid #555;
+     border-radius : 2%;
+     border: 1px solid #555;
 }
