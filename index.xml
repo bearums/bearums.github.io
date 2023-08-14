@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>RDSPT</title>
+    <title>TESTTEST on RDSPT</title>
     <link>http://rdspt.com/</link>
-    <description>Recent content on RDSPT</description>
+    <description>Recent content in TESTTEST on RDSPT</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="http://rdspt.com/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://rdspt.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>15) Cornell Elbe fit update</title>
       <link>http://rdspt.com/a/</link>
@@ -16,6 +17,39 @@
 ssssf
 jhfeoijlf
 this is a title </description>
+    </item>
+    
+    <item>
+      <title>saddlebag</title>
+      <link>http://rdspt.com/fb/</link>
+      <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/fb/</guid>
+      <description> one two sss
+ssssf
+jhfeoijlf
+this is a title </description>
+    </item>
+    
+    <item>
+      <title>saddlebag</title>
+      <link>http://rdspt.com/sb/</link>
+      <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/sb/</guid>
+      <description> one two sss
+ssssf
+jhfeoijlf
+this is a title </description>
+    </item>
+    
+    <item>
+      <title>TESTTEST</title>
+      <link>http://rdspt.com/b/</link>
+      <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/b/</guid>
+      <description> </description>
     </item>
     
   </channel>
