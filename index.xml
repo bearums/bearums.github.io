@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>TESTTEST on RDSPT</title>
+    <title>RDSPT</title>
     <link>http://rdspt.com/</link>
-    <description>Recent content in TESTTEST on RDSPT</description>
+    <description>Recent content on RDSPT</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 08 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://rdspt.com/index.xml" rel="self" type="application/rss+xml" />
@@ -21,22 +21,10 @@ this is a title </description>
     
     <item>
       <title>saddlebag</title>
-      <link>http://rdspt.com/fb/</link>
+      <link>http://rdspt.com/st/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://rdspt.com/fb/</guid>
-      <description> one two sss
-ssssf
-jhfeoijlf
-this is a title </description>
-    </item>
-    
-    <item>
-      <title>saddlebag</title>
-      <link>http://rdspt.com/sb/</link>
-      <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://rdspt.com/sb/</guid>
+      <guid>http://rdspt.com/st/</guid>
       <description> one two sss
 ssssf
 jhfeoijlf
@@ -50,6 +38,24 @@ this is a title </description>
       
       <guid>http://rdspt.com/b/</guid>
       <description> </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://rdspt.com/bikebags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/bikebags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://rdspt.com/usefulstuff/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/usefulstuff/</guid>
+      <description></description>
     </item>
     
   </channel>
