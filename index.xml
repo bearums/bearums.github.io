@@ -20,15 +20,21 @@ this is a title </description>
     </item>
     
     <item>
+      <title>futterbeutel</title>
+      <link>http://rdspt.com/fb/</link>
+      <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/fb/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
       <title>saddlebag</title>
       <link>http://rdspt.com/st/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
       
       <guid>http://rdspt.com/st/</guid>
-      <description> one two sss
-ssssf
-jhfeoijlf
-this is a title </description>
+      <description>Holds your innertube and looks good!</description>
     </item>
     
     <item>
@@ -46,6 +52,15 @@ this is a title </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://rdspt.com/bikebags/</guid>
+      <description>put bikebags here</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://rdspt.com/bikebags/__index/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rdspt.com/bikebags/__index/</guid>
       <description></description>
     </item>
     
@@ -55,7 +70,7 @@ this is a title </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://rdspt.com/usefulstuff/</guid>
-      <description></description>
+      <description>useful stuff goes here!</description>
     </item>
     
   </channel>
