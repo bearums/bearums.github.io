@@ -38,7 +38,7 @@ html { height: 100%; }
 body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
     font-weight: 300;
-    font-size: 15px;
+    font-size: 18px;
     color: #333;
     overflow: scroll;
     overflow-x: hidden;
@@ -96,4 +96,8 @@ a {
 
 .main {
 	margin : 30px;
+}
+
+.main p{
+margin :18px;
 }
