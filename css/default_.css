@@ -55,7 +55,8 @@ body {
 }
 
 a {
-	/*color: #555;*/
+	color : #e10606;
+
 	text-decoration: none;
 }
 
@@ -106,6 +107,10 @@ a {
 
 .main {
 	margin : 30px;
+}
+
+a.btn{	
+	color : #e10606;
 }
 
 .main p{
