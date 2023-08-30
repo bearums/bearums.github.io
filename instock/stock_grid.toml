@@ -3,7 +3,7 @@
 [[items]]
 title = "Everyday Pouch"
 image = "4_.jpg"
-description = "A pouch to keep organised and tidy"
+description = "A pouch to keep organised and tidy. 15€"
 url = "http://rdspt.com/pouch"
 cropOptions = "center"
 command = "Fill"
@@ -12,7 +12,16 @@ command = "Fill"
 [[items]]
 title = "Shopper"
 image = "2.jpg"
-description = "A sturdy tote that packs under your saddle"
+description = "A sturdy tote that packs under your saddle. 15€"
 url = "http://rdspt.com/tote"
+cropOptions = "center"
+command = "Fill"
+
+
+[[items]]
+title = "Saddlebag"
+image = "s.jpg"
+description = "Small saddlebag for a tube and tools. 20€"
+url = "http://rdspt.com/st"
 cropOptions = "center"
 command = "Fill"
