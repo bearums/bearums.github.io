@@ -14,3 +14,19 @@ command = "Fill"
 alt = "Hugrid Theme"
 description = "perfect for haribo, or a water bottle"
 url = "fb"
+
+[[items]]
+title = "Everyday Pouch"
+image = "e.jpg"
+description = "A pouch to keep organised and tidy"
+url = "pouch"
+cropOptions = "center"
+command = "Fill"
+
+[[items]]
+title = "Shopper"
+image = "2.jpg"
+description = "A sturdy tote that packs under your saddle"
+url = "tote"
+cropOptions = "center"
+command = "Fill"
