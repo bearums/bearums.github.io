@@ -23,10 +23,10 @@ url = "pouch"
 cropOptions = "center"
 command = "Fill"
 
-[[items]]
-title = "Shopper"
-image = "2.jpg"
-description = "A sturdy tote that packs under your saddle"
-url = "tote"
-cropOptions = "center"
-command = "Fill"
+#[[items]]
+#title = "Shopper"
+#image = "2.jpg"
+#description = "A sturdy tote that packs under your saddle"
+#url = "tote"
+#cropOptions = "center"
+#command = "Fill"
