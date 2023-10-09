@@ -23,6 +23,14 @@ url = "pouch"
 cropOptions = "center"
 command = "Fill"
 
+[[items]]
+title = "Trifold"
+image = "trifold1.jpg"
+description = "A lightweight wallet for cards and cash"
+url = "trifold"
+cropOptions = "center"
+command = "Fill"
+
 #[[items]]
 #title = "Shopper"
 #image = "2.jpg"
