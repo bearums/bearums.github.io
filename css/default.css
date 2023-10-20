@@ -16,8 +16,9 @@ src: url('http://rdspt.com/fonts/Steven.woff') format('woff'),
 */
 @font-face{
 font-family: "Steven_DE";
-src: url('http://rdspt.com/fonts/Steven_DE.woff') format('woff'),
-    url('http://rdspt.com/fonts/Steven_DE.ttf') format('truetype');
+src:  url('http://rdspt.com/fonts/Steven_DE.ttf') format('truetype'),
+	url('http://rdspt.com/fonts/Steven_DE.woff2') format('woff2'), 
+	url('http://rdspt.com/fonts/Steven_DE.woff') format('woff');
 }
 
 
