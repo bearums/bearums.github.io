@@ -16,14 +16,14 @@ src: url('http://rdspt.com/fonts/Steven.woff') format('woff'),
 */
 @font-face{
 font-family: "Steven_DE";
-src:  url('http://rdspt.com/fonts/Steven_DE.ttf') format('truetype'),
-	  url('http://rdspt.com/fonts/Steven_DE.woff2') format('woff2'), 
-	  url('http://rdspt.com/fonts/Steven_DE.woff') format('woff');
+src:  url('https://rdspt.com/fonts/Steven_DE.ttf') format('truetype'),
+	  url('https://rdspt.com/fonts/Steven_DE.woff2') format('woff2'), 
+	  url('https://rdspt.com/fonts/Steven_DE.woff') format('woff');
 }
 
 @font-face{
 	font-family: "VT323";
-	src:  url('http://rdspt.com/fonts/VT323-Regular.ttf') format('truetype');
+	src:  url('https://rdspt.com/fonts/VT323-Regular.ttf') format('truetype');
 	}
 	
 
