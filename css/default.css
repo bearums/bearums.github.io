@@ -17,9 +17,15 @@ src: url('http://rdspt.com/fonts/Steven.woff') format('woff'),
 @font-face{
 font-family: "Steven_DE";
 src:  url('http://rdspt.com/fonts/Steven_DE.ttf') format('truetype'),
-	url('http://rdspt.com/fonts/Steven_DE.woff2') format('woff2'), 
-	url('http://rdspt.com/fonts/Steven_DE.woff') format('woff');
+	  url('http://rdspt.com/fonts/Steven_DE.woff2') format('woff2'), 
+	  url('http://rdspt.com/fonts/Steven_DE.woff') format('woff');
 }
+
+@font-face{
+	font-family: "VT323";
+	src:  url('http://rdspt.com/fonts/VT323-Regular.ttf') format('truetype');
+	}
+	
 
 
 @import url(//fonts.googleapis.com/css?family=Lato:300,400,700);
@@ -53,7 +59,7 @@ html { height: 100%; }
 
 body {
     /*font-family: 'Lato', Calibri, Arial, sans-serif;*/
-	font-family: 'Steven_DE';
+	
 
     font-weight: 300;
     font-size: 22px;
