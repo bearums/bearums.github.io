@@ -1,2 +1,635 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><title>RDSPT</title><meta name=description content><meta name=keywords content><meta name=author content="Ben Hastings"><link rel=icon href=favicon.ico><meta name=generator content="Hugo 0.119.0"><style>body{background:#1d1f1e;color:#fff5ee;@font-face{font-family:steven_de;src:url(http://rdspt.com/fonts/Steven_DE.ttf)format('truetype'),url(http://rdspt.com/fonts/Steven_DE.woff2)format('woff2'),url(http://rdspt.com/fonts/Steven_DE.woff)format('woff')}font-family:steven_de}</style><link rel=stylesheet type=text/css href=../css/default_.css><link rel=stylesheet type=text/css href=http://rdspt.com/css/component_.css><link rel=stylesheet type=text/css href=http://rdspt.com/css/gallery.css><link rel=stylesheet type=text/css href=http://rdspt.com/css/grid.css><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-XXXXXXXX-Y","auto"),ga("send","pageview"))</script></head><body><div class=container><header class=clearfix><div style=color:#fff5ee><h1><a href=../><img src=http://rdspt.com/img/logo_alpha.png></a></h1></div><nav aria-label><ul><li class=headerList><a class=btn href=../about/>About</a></li></ul></nav></header></div><div class=main><main><header><h1></h1></header><p>here are some things that I have ready to go</p><ul id=og-grid class=og-grid><li style=height:auto><a href=http://rdspt.com/pouch data-largesrc=4_.jpg data-title="Everyday Pouch" data-description="A pouch to keep organised and tidy. 15€" data-buttontext><img src=../instock/4__hu00c7fd9630bec144ca470506a33b6bcd_179544_300x300_fill_q75_box_center.jpg style=border-radius:2%></a></li><li style=height:auto><a href=http://rdspt.com/tote data-largesrc=2.jpg data-title=Shopper data-description="A sturdy tote that packs under your saddle. 15€" data-buttontext><img src=../instock/2_hu7394ea4b3141173ac3414cc775cb2b47_280521_300x300_fill_q75_box_center.jpg style=border-radius:2%></a></li><li style=height:auto><a href=http://rdspt.com/st data-largesrc=s.jpg data-title=Saddlebag data-description="Small saddlebag for a tube and tools. 20€" data-buttontext><img src=../instock/s_huf5391c685621984ba2c21c513b35ae9d_300257_300x300_fill_q75_box_center.jpg style=border-radius:2%></a></li></ul></main><footer></footer></div><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js></script>
-<script>var $event=$.event,resizeTimeout,Grid,$special=$event.special.debouncedresize={setup:function(){$(this).on("resize",$special.handler)},teardown:function(){$(this).off("resize",$special.handler)},handler:function(e,t){var s=this,o=arguments,n=function(){e.type="debouncedresize",$event.dispatch.apply(s,o)};resizeTimeout&&clearTimeout(resizeTimeout),t?n():resizeTimeout=setTimeout(n,$special.threshold)},threshold:250},BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";$.fn.imagesLoaded=function(e){var s=this,t=$.isFunction($.Deferred)?$.Deferred():0,l=$.isFunction(t.notify),n=s.find("img").add(s.filter("img")),i=[],a=[],o=[];$.isPlainObject(e)&&$.each(e,function(n,s){n==="callback"?e=s:t&&t[n](s)});function c(){var i=$(a),r=$(o);t&&(o.length?t.reject(n,i,r):t.resolve(n)),$.isFunction(e)&&e.call(s,n,i,r)}function r(e,s){if(e.src===BLANK||$.inArray(e,i)!==-1)return;i.push(e),s?o.push(e):a.push(e),$.data(e,"imagesLoaded",{isBroken:s,src:e.src}),l&&t.notifyWith($(e),[s,n,$(a),$(o)]),n.length===i.length&&(setTimeout(c),n.unbind(".imagesLoaded"))}return n.length?n.bind("load.imagesLoaded error.imagesLoaded",function(e){r(e.target,e.type==="error")}).each(function(e,t){var s=t.src,n=$.data(t,"imagesLoaded");if(n&&n.src===s){r(t,n.isBroken);return}if(t.complete&&t.naturalWidth!==void 0){r(t,t.naturalWidth===0||t.naturalHeight===0);return}(t.readyState||t.complete)&&(t.src=BLANK,t.src=s)}):c(),t?t.promise(s):s},Grid=function(){var n,f=$("*#og-grid"),t=f.children("li"),s=-1,a=-1,r=0,l=10,d=$(window),v=$("html, body"),g={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd",msTransition:"MSTransitionEnd",transition:"transitionend"},i=g[Modernizr.prefixed("transition")],o=Modernizr.csstransitions,e={minHeight:500,speed:350,easing:"ease"};function b(t){e=$.extend(!0,{},e,t),f.imagesLoaded(function(){u(!0),m(),y()})}function j(e){t=t.add(e),e.each(function(){var e=$(this);e.data({offsetTop:e.offset().top,height:e.height()})}),h(e)}function u(e){t.each(function(){var t=$(this);t.data("offsetTop",t.offset().top),e&&t.data("height",t.height())})}function y(){h(t),d.on("debouncedresize",function(){r=0,a=-1,u(),m();var e=$.data(this,"preview");typeof e!="undefined"&&c()})}function h(e){e.on("click","span.og-close",function(){return c(),!1}).children("a").on("click",function(){var n=$(this).parent();return s===Array.from(e).findIndex(e=>e==n[0])?c():_(n),!1})}function m(){n={width:d.width(),height:d.height()}}function _(e){var t=$.data(this,"preview"),n=e.data("offsetTop");if(r=0,typeof t!="undefined")if(a!==n)n>a&&(r=t.height),c();else return t.update(e),!1;a=n,t=$.data(this,"preview",new p(e)),t.open()}function c(){s=-1;var e=$.data(this,"preview");e.close(),$.removeData(this,"preview")}function p(e){this.$item=e,this.expandedIdx=Array.from(t).findIndex(e=>e==this.$item[0]),this.create(),this.update()}return p.prototype={create:function(){this.$title=$("<h3></h3>"),this.$description=$("<p></p>"),this.$href=$('<a href="#">More here</a>'),this.$details=$('<div class="og-details"></div>').append(this.$title,this.$description,this.$href),this.$loading=$('<div class="og-loading"></div>'),this.$fullimage=$('<div class="og-fullimg"></div>').append(this.$loading),this.$closePreview=$('<span class="og-close"></span>'),this.$previewInner=$('<div class="og-expander-inner"></div>').append(this.$closePreview,this.$fullimage,this.$details),this.$previewEl=$('<div class="og-expander"></div>').append(this.$previewInner),this.$item.append(this.getEl()),o&&this.setTransition()},update:function(e){e&&(this.$item=e),s!==-1&&(a=t.eq(s),a.removeClass("og-expanded"),this.$item.addClass("og-expanded"),this.positionPreview()),s=this.$item.index();var n,a,i=this.$item.children("a"),o={href:i.attr("href"),largesrc:i.data("largesrc"),title:i.data("title"),description:i.data("description"),buttontext:i.data("buttontext")};this.$title.html(o.title),this.$description.html(o.description),o.buttontext?this.$href.text(o.buttontext):this.$href.text("More here"),o.href?(this.$href.attr("href",o.href),this.$href.show()):this.$href.hide(),n=this,typeof n.$largeImg!="undefined"&&n.$largeImg.remove(),n.$fullimage.is(":visible")&&(this.$loading.show(),$("<img/>").load(function(){var e=$(this);e.attr("src")===n.$item.children("a").data("largesrc")&&(n.$loading.hide(),n.$fullimage.find("img").remove(),n.$largeImg=e.fadeIn(350),n.$fullimage.append(n.$largeImg))}).attr("src",o.largesrc))},open:function(){setTimeout($.proxy(function(){this.setHeights(),this.positionPreview()},this),25)},close:function(){var e=this,n=function(){o&&$(this).off(i),e.$item.removeClass("og-expanded"),e.$previewEl.remove()};return setTimeout($.proxy(function(){typeof this.$largeImg!="undefined"&&this.$largeImg.fadeOut("fast"),this.$previewEl.css("height",0);var e=t.eq(this.expandedIdx);e.css("height",e.data("height")).on(i,n),o||n.call()},this),25),!1},calcHeight:function(){var t=n.height-this.$item.data("height")-l,s=n.height;t<e.minHeight&&(t=e.minHeight,s=e.minHeight+this.$item.data("height")+l),this.height=t,this.itemHeight=s},setHeights:function(){var e=this,t=function(){o&&e.$item.off(i),e.$item.addClass("og-expanded")};this.calcHeight(),this.$previewEl.css("height",this.height),this.$item.css("height",this.itemHeight).on(i,t),o||t.call()},positionPreview:function(){var s=this.$item.data("offsetTop"),t=this.$previewEl.offset().top-r,o=this.height+this.$item.data("height")+l<=n.height?s:this.height<n.height?t-(n.height-this.height):t;v.animate({scrollTop:o},e.speed)},setTransition:function(){this.$previewEl.css("transition","height "+e.speed+"ms "+e.easing),this.$item.css("transition","height "+e.speed+"ms "+e.easing)},getEl:function(){return this.$previewEl}},{init:b,addItems:j}}()</script><script>$(function(){Grid.init()})</script></body></html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+			<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>RDSPT</title>
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="Ben Hastings" />
+		<link rel="icon" href="favicon.ico" />
+		<meta name="generator" content="Hugo 0.119.0">
+		<style>
+		body {
+		background: #1d1f1e;
+		
+		color: #FFF5EE;
+		@font-face{
+font-family: "Steven_DE";
+			src:  url('http://rdspt.com/fonts/Steven_DE.ttf') format('truetype'),
+				url('http://rdspt.com/fonts/Steven_DE.woff2') format('woff2'), 
+				url('http://rdspt.com/fonts/Steven_DE.woff') format('woff');
+			}
+
+		font-family: 'Steven_DE';
+		}
+		
+		</style>
+		<link rel="stylesheet" type="text/css"  href="../css/default_.css" />
+
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/component_.css" />
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/gallery.css" />
+		<link rel="stylesheet" type="text/css" href="http://rdspt.com/css/grid.css" />
+
+		
+		
+
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-XXXXXXXX-Y', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+	</head>
+	<body>
+		<div class="container" >	
+				
+
+
+<header class="clearfix" >
+
+
+  
+ <div style="color : #FFF5EE">
+
+
+
+<h1><a href="../"> <img src = "http://rdspt.com/img/logo_alpha.png"></a></h1> 
+
+</div>
+
+
+
+
+
+
+
+  
+    <nav aria-label="">
+      <ul>
+        
+          <li class="headerList">
+            <a class="btn" href="../about/">About </a>
+          </li>
+        
+      </ul>
+    </nav>
+  
+
+
+
+</header>
+
+				</div>
+			<div class="main">
+
+ <main>
+     <header>
+            <h1></h1>
+     </header><p>here are some things that I have ready to go</p>
+
+
+
+
+
+
+
+
+
+
+
+
+    <ul id="og-grid" class="og-grid">
+        
+        
+
+            
+            
+            
+            
+            
+            
+
+
+
+            <li style="height:auto">
+                <a href="http://rdspt.com/pouch" data-largesrc="4_.jpg" data-title="Everyday Pouch" data-description="A pouch to keep organised and tidy. 15€" data-buttontext="">
+                    
+                        
+                        
+                        
+                        
+                        <img  src="../instock/4__hu00c7fd9630bec144ca470506a33b6bcd_179544_300x300_fill_q75_box_center.jpg" style="border-radius : 2%" />
+                    
+                </a>
+            </li>
+        
+        
+
+            
+            
+            
+            
+            
+            
+
+
+
+            <li style="height:auto">
+                <a href="http://rdspt.com/tote" data-largesrc="2.jpg" data-title="Shopper" data-description="A sturdy tote that packs under your saddle. 15€" data-buttontext="">
+                    
+                        
+                        
+                        
+                        
+                        <img  src="../instock/2_hu7394ea4b3141173ac3414cc775cb2b47_280521_300x300_fill_q75_box_center.jpg" style="border-radius : 2%" />
+                    
+                </a>
+            </li>
+        
+        
+
+            
+            
+            
+            
+            
+            
+
+
+
+            <li style="height:auto">
+                <a href="http://rdspt.com/st" data-largesrc="s.jpg" data-title="Saddlebag" data-description="Small saddlebag for a tube and tools. 20€" data-buttontext="">
+                    
+                        
+                        
+                        
+                        
+                        <img  src="../instock/s_huf5391c685621984ba2c21c513b35ae9d_300257_300x300_fill_q75_box_center.jpg" style="border-radius : 2%" />
+                    
+                </a>
+            </li>
+        
+    </ul>
+
+</main>
+
+
+				<footer>			
+	
+</footer>
+			</div>
+		
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>
+			var $event = $.event,
+			$special,
+			resizeTimeout;
+
+			$special = $event.special.debouncedresize = {
+				setup: function() {
+					$( this ).on( "resize", $special.handler );
+				},
+				teardown: function() {
+					$( this ).off( "resize", $special.handler );
+				},
+				handler: function( event, execAsap ) {
+					var context = this,
+						args = arguments,
+						dispatch = function() {
+							event.type = "debouncedresize";
+							$event.dispatch.apply( context, args );
+						};
+
+					if ( resizeTimeout ) {
+						clearTimeout( resizeTimeout );
+					}
+
+					execAsap ?
+						dispatch() :
+						resizeTimeout = setTimeout( dispatch, $special.threshold );
+				},
+				threshold: 250
+			};
+
+			var BLANK = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+
+			$.fn.imagesLoaded = function( callback ) {
+				var $this = this,
+					deferred = $.isFunction($.Deferred) ? $.Deferred() : 0,
+					hasNotify = $.isFunction(deferred.notify),
+					$images = $this.find('img').add( $this.filter('img') ),
+					loaded = [],
+					proper = [],
+					broken = [];
+
+				if ($.isPlainObject(callback)) {
+					$.each(callback, function (key, value) {
+						if (key === 'callback') {
+							callback = value;
+						} else if (deferred) {
+							deferred[key](value);
+						}
+					});
+				}
+
+				function doneLoading() {
+					var $proper = $(proper),
+						$broken = $(broken);
+
+					if ( deferred ) {
+						if ( broken.length ) {
+							deferred.reject( $images, $proper, $broken );
+						} else {
+							deferred.resolve( $images );
+						}
+					}
+
+					if ( $.isFunction( callback ) ) {
+						callback.call( $this, $images, $proper, $broken );
+					}
+				}
+
+				function imgLoaded( img, isBroken ) {
+					if ( img.src === BLANK || $.inArray( img, loaded ) !== -1 ) {
+						return;
+					}
+
+					loaded.push( img );
+
+					if ( isBroken ) {
+						broken.push( img );
+					} else {
+						proper.push( img );
+					}
+
+					$.data( img, 'imagesLoaded', { isBroken: isBroken, src: img.src } );
+
+					if ( hasNotify ) {
+						deferred.notifyWith( $(img), [ isBroken, $images, $(proper), $(broken) ] );
+					}
+
+					if ( $images.length === loaded.length ){
+						setTimeout( doneLoading );
+						$images.unbind( '.imagesLoaded' );
+					}
+				}
+
+				if ( !$images.length ) {
+					doneLoading();
+				} else {
+					$images.bind( 'load.imagesLoaded error.imagesLoaded', function( event ){
+						imgLoaded( event.target, event.type === 'error' );
+					}).each( function( i, el ) {
+						var src = el.src;
+
+						var cached = $.data( el, 'imagesLoaded' );
+						if ( cached && cached.src === src ) {
+							imgLoaded( el, cached.isBroken );
+							return;
+						}
+
+						if ( el.complete && el.naturalWidth !== undefined ) {
+							imgLoaded( el, el.naturalWidth === 0 || el.naturalHeight === 0 );
+							return;
+						}
+
+						if ( el.readyState || el.complete ) {
+							el.src = BLANK;
+							el.src = src;
+						}
+					});
+				}
+
+				return deferred ? deferred.promise( $this ) : $this;
+			};
+
+			var Grid = (function() {
+
+				var $grid = $( '*#og-grid' ),
+					$items = $grid.children( 'li' ),
+					current = -1,
+					previewPos = -1,
+					scrollExtra = 0,
+					marginExpanded = 10,
+					$window = $( window ), winsize,
+					$body = $( 'html, body' ),
+					transEndEventNames = {
+						'WebkitTransition' : 'webkitTransitionEnd',
+						'MozTransition' : 'transitionend',
+						'OTransition' : 'oTransitionEnd',
+						'msTransition' : 'MSTransitionEnd',
+						'transition' : 'transitionend'
+					},
+					transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+					support = Modernizr.csstransitions,
+					settings = {
+						minHeight : 500,
+						speed : 350,
+						easing : 'ease'
+					};
+
+				function init( config ) {
+					
+					settings = $.extend( true, {}, settings, config );
+
+					$grid.imagesLoaded( function() {
+
+						saveItemInfo( true );
+						getWinSize();
+						initEvents();
+
+					} );
+
+				}
+
+				function addItems( $newitems ) {
+
+					$items = $items.add( $newitems );
+
+					$newitems.each( function() {
+						var $item = $( this );
+						$item.data( {
+							offsetTop : $item.offset().top,
+							height : $item.height()
+						} );
+					} );
+
+					initItemsEvents( $newitems );
+
+				}
+
+				function saveItemInfo( saveheight ) {
+					$items.each( function() {
+						var $item = $( this );
+						$item.data( 'offsetTop', $item.offset().top );
+						if( saveheight ) {
+							$item.data( 'height', $item.height() );
+						}
+					} );
+				}
+
+				function initEvents() {
+					
+					initItemsEvents( $items );
+					
+					$window.on( 'debouncedresize', function() {
+						
+						scrollExtra = 0;
+						previewPos = -1;
+						saveItemInfo();
+						getWinSize();
+						var preview = $.data( this, 'preview' );
+						if( typeof preview != 'undefined' ) {
+							hidePreview();
+						}
+
+					} );
+
+				}
+
+				function initItemsEvents( $items ) {
+					$items.on( 'click', 'span.og-close', function() {
+						hidePreview();
+						return false;
+					} ).children( 'a' ).on( 'click', function(e) {
+
+						var $item = $( this ).parent();
+						current === Array.from($items).findIndex(d => d == $item[0]) ? hidePreview() : showPreview( $item );
+						return false;
+
+					} );
+				}
+
+				function getWinSize() {
+					winsize = { width : $window.width(), height : $window.height() };
+				}
+
+				function showPreview( $item ) {
+
+					var preview = $.data( this, 'preview' ),
+						position = $item.data( 'offsetTop' );
+
+					scrollExtra = 0;
+
+					if( typeof preview != 'undefined' ) {
+
+						if( previewPos !== position ) {
+							if( position > previewPos ) {
+								scrollExtra = preview.height;
+							}
+							hidePreview();
+						}
+						else {
+							preview.update( $item );
+							return false;
+						}
+						
+					}
+
+					previewPos = position;
+					preview = $.data( this, 'preview', new Preview( $item ) );
+					preview.open();
+
+				}
+
+				function hidePreview() {
+					current = -1;
+					var preview = $.data( this, 'preview' );
+					preview.close();
+					$.removeData( this, 'preview' );
+				}
+
+				function Preview( $item ) {
+					this.$item = $item;
+					this.expandedIdx = Array.from($items).findIndex(d => d == this.$item[0]);
+					this.create();
+					this.update();
+				}
+
+				Preview.prototype = {
+					create : function() {
+						this.$title = $( '<h3></h3>' );
+						this.$description = $( '<p></p>' );
+						this.$href = $( '<a href="#">More here</a>' );
+						this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
+						this.$loading = $( '<div class="og-loading"></div>' );
+						this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
+						this.$closePreview = $( '<span class="og-close"></span>' );
+						this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$fullimage, this.$details );
+						this.$previewEl = $( '<div class="og-expander"></div>' ).append( this.$previewInner );
+						this.$item.append( this.getEl() );
+						if( support ) {
+							this.setTransition();
+						}
+					},
+					update : function( $item ) {
+
+						if( $item ) {
+							this.$item = $item;
+						}
+						
+						if( current !== -1 ) {
+							var $currentItem = $items.eq( current );
+							$currentItem.removeClass( 'og-expanded' );
+							this.$item.addClass( 'og-expanded' );
+							this.positionPreview();
+						}
+
+						current = this.$item.index();
+
+						var $itemEl = this.$item.children( 'a' ),
+							eldata = {
+								href : $itemEl.attr( 'href' ),
+								largesrc : $itemEl.data( 'largesrc' ),
+								title : $itemEl.data( 'title' ),
+								description : $itemEl.data( 'description' ),
+								buttontext : $itemEl.data( 'buttontext' )
+							};
+
+						this.$title.html( eldata.title );
+						this.$description.html( eldata.description );
+						if(eldata.buttontext) this.$href.text(eldata.buttontext);
+						else this.$href.text("More here")
+
+						if (eldata.href) {
+							this.$href.attr( 'href', eldata.href );
+							this.$href.show();
+						}
+						else {
+							this.$href.hide();
+						}
+
+						var self = this;
+						
+						if( typeof self.$largeImg != 'undefined' ) {
+							self.$largeImg.remove();
+						}
+
+						if( self.$fullimage.is( ':visible' ) ) {
+							this.$loading.show();
+							$( '<img/>' ).load( function() {
+								var $img = $( this );
+								if( $img.attr( 'src' ) === self.$item.children('a').data( 'largesrc' ) ) {
+									self.$loading.hide();
+									self.$fullimage.find( 'img' ).remove();
+									self.$largeImg = $img.fadeIn( 350 );
+									self.$fullimage.append( self.$largeImg );
+								}
+							} ).attr( 'src', eldata.largesrc );	
+						}
+
+					},
+					open : function() {
+
+						setTimeout( $.proxy( function() {	
+							this.setHeights();
+							this.positionPreview();
+						}, this ), 25 );
+
+					},
+					close : function() {
+
+						var self = this,
+							onEndFn = function() {
+								if( support ) {
+									$( this ).off( transEndEventName );
+								}
+								self.$item.removeClass( 'og-expanded' );
+								self.$previewEl.remove();
+							};
+
+						setTimeout( $.proxy( function() {
+
+							if( typeof this.$largeImg !== 'undefined' ) {
+								this.$largeImg.fadeOut( 'fast' );
+							}
+							this.$previewEl.css( 'height', 0 );
+							var $expandedItem = $items.eq( this.expandedIdx );
+							$expandedItem.css( 'height', $expandedItem.data( 'height' ) ).on( transEndEventName, onEndFn );
+
+							if( !support ) {
+								onEndFn.call();
+							}
+
+						}, this ), 25 );
+						
+						return false;
+
+					},
+					calcHeight : function() {
+
+						var heightPreview = winsize.height - this.$item.data( 'height' ) - marginExpanded,
+							itemHeight = winsize.height;
+
+						if( heightPreview < settings.minHeight ) {
+							heightPreview = settings.minHeight;
+							itemHeight = settings.minHeight + this.$item.data( 'height' ) + marginExpanded;
+						}
+
+						this.height = heightPreview;
+						this.itemHeight = itemHeight;
+
+					},
+					setHeights : function() {
+
+						var self = this,
+							onEndFn = function() {
+								if( support ) {
+									self.$item.off( transEndEventName );
+								}
+								self.$item.addClass( 'og-expanded' );
+							};
+
+						this.calcHeight();
+						this.$previewEl.css( 'height', this.height );
+						this.$item.css( 'height', this.itemHeight ).on( transEndEventName, onEndFn );
+
+						if( !support ) {
+							onEndFn.call();
+						}
+
+					},
+					positionPreview : function() {
+
+						var position = this.$item.data( 'offsetTop' ),
+							previewOffsetT = this.$previewEl.offset().top - scrollExtra,
+							scrollVal = this.height + this.$item.data( 'height' ) + marginExpanded <= winsize.height ? position : this.height < winsize.height ? previewOffsetT - ( winsize.height - this.height ) : previewOffsetT;
+						
+						$body.animate( { scrollTop : scrollVal }, settings.speed );
+
+					},
+					setTransition  : function() {
+						this.$previewEl.css( 'transition', 'height ' + settings.speed + 'ms ' + settings.easing );
+						this.$item.css( 'transition', 'height ' + settings.speed + 'ms ' + settings.easing );
+					},
+					getEl : function() {
+						return this.$previewEl;
+					}
+				}
+
+				return { 
+					init : init,
+					addItems : addItems
+				};
+
+			})();
+		</script>
+		<script>
+			$(function() {
+				Grid.init();
+			});
+		</script>
+
+	</body>
+</html>
