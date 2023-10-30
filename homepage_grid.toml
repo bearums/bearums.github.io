@@ -31,6 +31,15 @@ url = "trifold"
 cropOptions = "center"
 command = "Fill"
 
+[[items]]
+title = "Schlüsselmappe"
+image = "mappe.jpg"
+description = "Never lose your keys again"
+url = "schlslmappe"
+cropOptions = "center"
+command = "Fill"
+
+
 #[[items]]
 #title = "Shopper"
 #image = "2.jpg"

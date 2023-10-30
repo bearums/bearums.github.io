@@ -9,7 +9,7 @@
    id="svg8"
    sodipodi:docname="drawing_steve_pix.svg"
    inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
-   inkscape:export-filename="../pngs/logo_pix.png"
+   inkscape:export-filename="../pngs/logo_pix_boxpng"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -140,11 +140,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.5741877"
-     inkscape:cx="65.312309"
-     inkscape:cy="43.094461"
+     inkscape:zoom="5.655"
+     inkscape:cx="63.129973"
+     inkscape:cy="38.992042"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer7"
+     inkscape:current-layer="layer8"
      showgrid="true"
      inkscape:window-width="1920"
      inkscape:window-height="997"
@@ -199,7 +199,7 @@
      inkscape:groupmode="layer"
      id="layer7"
      inkscape:label="smooth 1"
-     style="display:inline"
+     style="display:none"
      transform="translate(-6.9788876,0.78277388)">
     <ellipse
        style="display:inline;fill:#ca7420;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -224,7 +224,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="pix1"
-     style="display:none">
+     style="display:inline">
     <g
        id="g29132"
        style="display:inline" />
@@ -245,9 +245,9 @@
        y="15.875001" />
     <path
        style="display:inline;fill:#ce7621;fill-opacity:0.980392;stroke:#000000;stroke-width:0.132292;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 0,20.6375 h 20.6375 v 0 h 0.79375 V 19.84375 H 22.225 V 19.05 h 0.79375 V 18.25625 H 23.8125 V 17.4625 h 0.79375 v -3.175 H 25.4 V 8.7312501 h -0.79375 v -3.96875 l -0.79375,8e-7 v -0.79375 h -0.79375 v -0.79375 H 22.225 v -0.79375 H 21.43125 V 1.587501 H 20.6375 V 0.79375086 H 19.84375 V 8.5e-7 H 19.05 V 0 H 0.79375001 V 0.79375001 H 0 Z"
+       d="m 0,20.6375 h 20.6375 v 0 h 0.79375 V 19.84375 H 22.225 V 19.05 h 0.79375 V 18.25625 H 23.8125 V 17.4625 h 0.79375 V 15.08125 H 25.4 L 25.4,12.7 h 0.79375 l 0,-3.1749999 H 25.4 l 0,-2.38125 h -0.79375 v -2.38125 l -0.79375,8e-7 v -0.79375 h -0.79375 v -0.79375 H 22.225 v -0.79375 H 21.43125 V 1.587501 H 20.6375 V 0.79375086 H 19.84375 V 8.5e-7 H 19.05 V 0 H 0.79375001 V 0.79375001 H 0 Z"
        id="path8745"
-       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccc" />
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccc" />
     <path
        inkscape:original-d="M 0,0"
        inkscape:path-effect="#path-effect34362"
@@ -298,15 +298,15 @@
        style="font-weight:300;font-size:26.6667px;line-height:1.25;font-family:Tourney;-inkscape-font-specification:'Tourney Light';text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect914);display:inline;stroke:#000101;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="316.57184"
          y="11.307797"
-         id="tspan1687"><tspan
+         id="tspan629"><tspan
            style="font-weight:normal;font-family:Steven;-inkscape-font-specification:Steven"
-           id="tspan1685">RDSPT
+           id="tspan627">RDSPT
 </tspan></tspan><tspan
          x="258.91797"
          y="65.620297"
-         id="tspan1691"><tspan
+         id="tspan633"><tspan
            style="font-weight:normal;font-family:Steven;-inkscape-font-specification:Steven"
-           id="tspan1689">.</tspan></tspan></text>
+           id="tspan631">.</tspan></tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -328,16 +328,19 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="box"
-     style="display:none"
+     style="display:inline"
      inkscape:export-filename="logo_smooth_box.png"
      inkscape:export-xdpi="300"
      inkscape:export-ydpi="300">
     <rect
        style="fill:#ffffff;fill-opacity:0.00132829;stroke:#0051ff;stroke-width:0.132292;stroke-dasharray:none;stroke-opacity:1"
        id="rect31457"
-       width="26.987501"
-       height="22.225"
-       x="-7.3436632e-18"
-       y="0" />
+       width="24.606251"
+       height="20.637501"
+       x="-6.6956929e-18"
+       y="0"
+       inkscape:export-filename="../pngs/linsta.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
   </g>
 </svg>
