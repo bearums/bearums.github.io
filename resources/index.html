@@ -30,6 +30,26 @@
 		
 		<script src="https://rdspt.com/js/modernizr.custom.js"></script>
 
+		<script> 
+			const date = new Date();
+
+			const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+			const currentDayOfWeek = daysOfWeek[date.getDay()];
+			const DayInteger = date.getDay();
+
+			const currentTime = date.toLocaleTimeString();
+
+			console.log("Today is ${currentDayOfWeek} and the time is ${currentTime}");
+			console.log(currentDayOfWeek)
+			console.log(DayInteger)
+
+			
+			var el = document.getElementsByClassName("headerList");
+			console.log(el);
+			
+			
+		</script>
+
 	
 <script>
 var doNotTrack = false;
@@ -71,8 +91,12 @@ if (!doNotTrack) {
     <nav aria-label="">
       <ul>
         
-          <li class="headerList">
+          <li class="headerList" id="headerList">
             <a class="btn" href="../about/">About </a>
+          </li>
+        
+          <li class="headerList" id="headerList">
+            <a class="btn" href="https://shop.rdspt.com/">Shop </a>
           </li>
         
       </ul>
