@@ -1,11 +1,20 @@
 [[items]]
 title = "Saddlebag"
-image = "c.jpg"
+image = "st.png"
 alt = "Hugrid Theme"
 description = "a small bag for tubes and tools"
 url = "st"
 cropOptions = "center q50"
 command = "Fill"
+
+[[items]]
+title = "Barrelbag"
+image = "barrel.jpg"
+description = "Round and reliable"
+url = "barrel"
+cropOptions = "center"
+command = "Fill"
+
 [[items]]
 title = "Stembag"
 image = "a.jpg"
@@ -15,13 +24,8 @@ alt = "Hugrid Theme"
 description = "perfect for haribo, or a water bottle"
 url = "fb"
 
-[[items]]
-title = "Everyday Pouch"
-image = "e.jpg"
-description = "A pouch to keep organised and tidy"
-url = "pouch"
-cropOptions = "center"
-command = "Fill"
+
+
 
 [[items]]
 title = "Trifold"
@@ -36,6 +40,15 @@ title = "Schlüsselmappe"
 image = "mappe.jpg"
 description = "Never lose your keys again"
 url = "schlslmappe"
+cropOptions = "center"
+command = "Fill"
+
+
+[[items]]
+title = "Everyday Pouch"
+image = "e.jpg"
+description = "A pouch to keep organised and tidy"
+url = "pouch"
 cropOptions = "center"
 command = "Fill"
 
