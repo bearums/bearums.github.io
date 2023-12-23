@@ -26,7 +26,11 @@ src:  url('https://rdspt.com/fonts/Steven_DE.ttf') format('truetype'),
 	src:  url('https://rdspt.com/fonts/VT323-Regular.ttf') format('truetype');
 	}
 	
-
+	@font-face{
+		font-family: "BauhausMedium";
+		src:  url('https://rdspt.com/fonts/BauhausStd-Medium.ttf') format('truetype');
+		}
+		
 
 @import url(//fonts.googleapis.com/css?family=Lato:300,400,700);
 
