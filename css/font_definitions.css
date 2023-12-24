@@ -63,3 +63,7 @@
             font-family: "routed-gothic";
             src:  url('https://rdspt.com/fonts/changing/routed-gothic.ttf') format('truetype');
             }
+            @font-face{
+                font-family: "Hack-Regular";
+                src:  url('https://rdspt.com/fonts/changing/Hack-Regular.ttf') format('truetype');
+                }
