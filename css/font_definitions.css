@@ -31,8 +31,35 @@
             src:  url('https://rdspt.com/fonts/changing/Tschich.ttf') format('truetype');
             }
 @font-face{
-                font-family: "ChildWrittenBold";
-                src:  url('https://rdspt.com/fonts/changing/ChildWritten-Bold.ttf') format('truetype');
-                }
+            font-family: "ChildWrittenBold";
+            src:  url('https://rdspt.com/fonts/changing/ChildWritten-Bold.ttf') format('truetype');
+            }
  
-                
+@font-face{
+            font-family: "Katrina";
+            src:  url('https://rdspt.com/fonts/changing/Katrina.ttf') format('truetype');
+            }
+                     
+@font-face{
+            font-family: "Cassandra";
+            src:  url('https://rdspt.com/fonts/changing/CassandraTwo.ttf') format('truetype');
+            }
+@font-face{
+            font-family: "Multistrokes";
+            src:  url('https://rdspt.com/fonts/changing/Multistrokes.ttf') format('truetype');
+            }
+
+@font-face{
+            font-family: "BauhausStd-Medium";
+            src:  url('https://rdspt.com/fonts/changing/BauhausStd-Medium.ttf') format('truetype');
+            }
+
+@font-face{
+            font-family: "PixelSplitter-Bold";
+            src:  url('https://rdspt.com/fonts/changing/PixelSplitter-Bold.ttf') format('truetype');
+            }
+
+@font-face{
+            font-family: "routed-gothic";
+            src:  url('https://rdspt.com/fonts/changing/routed-gothic.ttf') format('truetype');
+            }
