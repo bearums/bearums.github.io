@@ -20,5 +20,19 @@
         src:  url('https://rdspt.com/fonts/P22AlbersThree/P22AlbersThree.ttf') format('truetype');
         }
 
-
+@font-face{
+            font-family: "BigSquareDots";
+            src:  url('https://rdspt.com/fonts/changing/BigSquareDots.ttf') format('truetype');
+            }
+    
+            
+@font-face{
+            font-family: "Tschich";
+            src:  url('https://rdspt.com/fonts/changing/Tschich.ttf') format('truetype');
+            }
+@font-face{
+                font-family: "ChildWrittenBold";
+                src:  url('https://rdspt.com/fonts/changing/ChildWritten-Bold.ttf') format('truetype');
+                }
+ 
                 
