@@ -7,7 +7,7 @@
    viewBox="0 0 35 22"
    version="1.1"
    id="svg8"
-   sodipodi:docname="drawing.svg"
+   sodipodi:docname="logo_plain.svg"
    inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
    inkscape:export-filename="../lab.png"
    inkscape:export-xdpi="400.02499"
@@ -186,25 +186,5 @@
          cy="19.017258"
          cx="-6.4991732" />
     </g>
-    <text
-       xml:space="preserve"
-       transform="matrix(0.25542774,0,0,0.2551532,-43.645958,1.9030529)"
-       id="text5186"
-       style="font-weight:300;font-size:23.4918px;line-height:1.25;font-family:Tourney;-inkscape-font-specification:'Tourney Light';text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect5188);display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.705079;stroke-dasharray:none;stroke-opacity:1"><tspan
-         x="175.19763"
-         y="40.700008"
-         id="tspan3097"><tspan
-           style="font-weight:normal;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';fill:#000000"
-           id="tspan3095">RDSPT   COM</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       transform="matrix(0.25542774,0,0,0.2551532,-36.623165,8.2623165)"
-       id="text642"
-       style="font-weight:300;font-size:22.1099px;line-height:1.25;font-family:Tourney;-inkscape-font-specification:'Tourney Light';text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect644);display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.705079;stroke-dasharray:none;stroke-opacity:1"><tspan
-         x="222.97611"
-         y="39.396624"
-         id="tspan3101"><tspan
-           style="font-weight:normal;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic'"
-           id="tspan3099">.COM</tspan></tspan></text>
   </g>
 </svg>
