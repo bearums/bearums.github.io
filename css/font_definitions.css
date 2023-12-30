@@ -67,3 +67,7 @@
                 font-family: "Hack-Regular";
                 src:  url('https://rdspt.com/fonts/changing/Hack-Regular.ttf') format('truetype');
                 }
+                @font-face{
+                    font-family: "Soloviev";
+                    src:  url('https://rdspt.com/fonts/changing/Soloviev.otf') format("opentype");
+                    }
