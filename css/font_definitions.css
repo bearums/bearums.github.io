@@ -63,11 +63,11 @@
             font-family: "routed-gothic";
             src:  url('https://rdspt.com/fonts/changing/routed-gothic.ttf') format('truetype');
             }
-            @font-face{
-                font-family: "Hack-Regular";
-                src:  url('https://rdspt.com/fonts/changing/Hack-Regular.ttf') format('truetype');
-                }
-                @font-face{
-                    font-family: "Soloviev";
-                    src:  url('https://rdspt.com/fonts/changing/Soloviev.otf') format("opentype");
-                    }
+@font-face{
+            font-family: "Hack-Regular";
+            src:  url('https://rdspt.com/fonts/changing/Hack-Regular.ttf') format('truetype');
+            }
+@font-face{
+            font-family: "Soloviev";
+            src:  url('https://rdspt.com/fonts/changing/Soloviev.otf') format("opentype");
+            }
