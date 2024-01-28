@@ -110,3 +110,24 @@ footer {
 	font-size: 14px;
 }
 
+
+ h1.headingFancy {
+    position: relative;
+    font-size: 40px;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+}
+h1.headingFancy:before ,  h1.headingFancy:after  {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 50%;
+    height: 1px;
+    content: '\a0';
+    background-color: red;
+}
+ h1.headingFancy:before {
+    margin-left: -50%;
+    text-align: right;
+}
