@@ -120,12 +120,12 @@ footer {
 }
 h1.headingFancy:before ,  h1.headingFancy:after  {
     position: absolute;
-    top: 51%;
+    top: 40%;
     overflow: hidden;
     width: 50%;
-    height: 1px;
+    height: 3px;
     content: '\a0';
-    background-color: red;
+    background-color: rgb(255, 0, 0);
 }
  h1.headingFancy:before {
     margin-left: -50%;
