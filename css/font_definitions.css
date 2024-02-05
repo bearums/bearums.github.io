@@ -71,3 +71,7 @@
             font-family: "Soloviev";
             src:  url('https://rdspt.com/fonts/changing/Soloviev.otf') format("opentype");
             }
+@font-face{
+            font-family: "Ubahn";
+            src:  url('https://rdspt.com/fonts/weekday_fonts/Ubahn.otf') format("truetype");
+                }
