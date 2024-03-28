@@ -1,6 +1,25 @@
 [[items]]
+title = "Framebags"
+image = "framebag.jpg"
+alt = "Hugrid Theme"
+description = "fits like a glove"
+url = "framebag"
+cropOptions = "center q50"
+command = "Fill"
+
+[[items]]
+title = "Arschbombe"
+image = "ab.jpg"
+alt = "Hugrid Theme"
+description = "For times when the Arschrakete is too much"
+url = "arschbombe"
+cropOptions = "center q50"
+command = "Fill"
+
+
+[[items]]
 title = "Saddlebag"
-image = "st.png"
+image = "st_c.jpg"
 alt = "Hugrid Theme"
 description = "a small bag for tubes and tools"
 url = "st"
