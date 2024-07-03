@@ -16,6 +16,13 @@ url = "arschbombe"
 cropOptions = "center q50"
 command = "Fill"
 
+[[items]]
+title = "Schlüsselmappe"
+image = "mappe.jpg"
+description = "Never lose your keys again"
+url = "schlslmappe"
+cropOptions = "center"
+command = "Fill"
 
 [[items]]
 title = "Saddlebag"
@@ -45,29 +52,6 @@ url = "fb"
 
 
 
-[[items]]
-title = "Trifold"
-image = "trifold1.jpg"
-description = "A lightweight wallet for cards and cash"
-url = "trifold"
-cropOptions = "center"
-command = "Fill"
 
-[[items]]
-title = "Schlüsselmappe"
-image = "mappe.jpg"
-description = "Never lose your keys again"
-url = "schlslmappe"
-cropOptions = "center"
-command = "Fill"
-
-
-[[items]]
-title = "Everyday Pouch"
-image = "e.jpg"
-description = "A pouch to keep organised and tidy"
-url = "pouch"
-cropOptions = "center"
-command = "Fill"
 
 
