@@ -2,16 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="30.000002mm"
-   height="30mm"
-   viewBox="0 0 30 30"
+   width="500"
+   height="500"
+   viewBox="0 0 132.29166 132.29167"
    version="1.1"
    id="svg330"
-   inkscape:export-filename="../bare_etsy.png"
-   inkscape:export-xdpi="500"
-   inkscape:export-ydpi="500"
+   inkscape:export-filename="../bare3.png"
+   inkscape:export-xdpi="112.88889"
+   inkscape:export-ydpi="112.88889"
    inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
-   sodipodi:docname="bare.svg"
+   sodipodi:docname="bare_etsy.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="3.029516"
-     inkscape:cx="119.16095"
-     inkscape:cy="54.629188"
+     inkscape:zoom="0.70677249"
+     inkscape:cx="116.02036"
+     inkscape:cy="259.63093"
      inkscape:window-width="1920"
      inkscape:window-height="997"
      inkscape:window-x="0"
@@ -60,42 +60,44 @@
        transform="matrix(1.2995533,0,0,1.2995533,-1.0929936,-2.8727039)"
        style="display:inline;stroke-width:0.769493">
       <g
-         id="g2656">
+         id="g2656"
+         transform="matrix(4.2443999,0,0,4.2536339,-0.68312847,-2.2650143)"
+         style="stroke-width:0.1811">
         <rect
-           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.611748;stroke-linecap:round"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.143974;stroke-linecap:round"
            id="rect643"
-           width="23.61673"
-           height="24.344439"
-           x="0.89347237"
-           y="2.323998" />
+           width="27.386351"
+           height="26.541317"
+           x="-1.6826289"
+           y="-0.17432702" />
         <ellipse
-           style="fill:#ce7622;fill-opacity:0.999298;stroke:none;stroke-width:0.407193;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#ce7622;fill-opacity:0.999298;stroke:none;stroke-width:0.0958322;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="circle11290"
-           cx="12.473613"
-           cy="13.594762"
+           cx="12.351117"
+           cy="13.01815"
            inkscape:export-xdpi="25.400002"
            inkscape:export-ydpi="25.400002"
            inkscape:export-filename="/home/ben/path815.png"
-           rx="10.87001"
-           ry="10.425661" />
+           rx="11.348365"
+           ry="10.034829" />
         <ellipse
-           style="fill:#e10606;fill-opacity:1;stroke:none;stroke-width:0.408762;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#e10606;fill-opacity:1;stroke:none;stroke-width:0.0962018;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="ellipse11292"
            transform="matrix(-0.98696731,0.16092087,0.2818156,0.95946859,0,0)"
            ry="2.2215106"
            rx="2.6843333"
-           cy="20.272287"
-           cx="-3.0677793" />
+           cy="18.646963"
+           cx="-3.8454728" />
         <text
            xml:space="preserve"
-           transform="matrix(0.2035956,0,0,0.2035956,-7.9271779,3.0566854)"
+           transform="matrix(0.2035956,0,0,0.2035956,-8.2762991,1.7752194)"
            id="text362"
-           style="font-weight:300;font-size:21.3333px;line-height:1.25;font-family:Tourney;-inkscape-font-specification:'Tourney Light';text-align:center;letter-spacing:0.8px;word-spacing:0px;white-space:pre;shape-inside:url(#rect364);display:inline"><tspan
+           style="font-weight:300;font-size:21.3333px;line-height:1.25;font-family:Tourney;-inkscape-font-specification:'Tourney Light';text-align:center;letter-spacing:0.8px;word-spacing:0px;white-space:pre;shape-inside:url(#rect364);display:inline;stroke-width:0.1811"><tspan
              x="57.373127"
              y="49.834071"
-             id="tspan5198"><tspan
+             id="tspan4918"><tspan
                style="font-weight:normal;font-family:Fatsans;-inkscape-font-specification:Fatsans"
-               id="tspan5196">RDSPT</tspan></tspan></text>
+               id="tspan4916">RDSPT</tspan></tspan></text>
       </g>
     </g>
   </g>
