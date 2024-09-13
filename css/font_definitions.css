@@ -75,3 +75,10 @@
             font-family: "Ubahn";
             src:  url('https://rdspt.com/fonts/weekday_fonts/Ubahn.ttf') format("truetype");
                 }
+                
+@font-face{
+            font-family: "Levitate";
+            src:  url('https://rdspt.com/fonts/Levitate/Fonts/Levitate_Regular_v1.0.ttf') format("truetype"),
+                    url('https://rdspt.com/fonts/Levitate/WebFonts/levitate_regular_v1.0-webfont.woff2') format('woff2'), 
+                    url('https://rdspt.com/fonts/Levitate/WebFonts/levitate_regular_v1.0-webfont.woff' format('woff');
+                }
