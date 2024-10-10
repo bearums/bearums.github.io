@@ -82,3 +82,8 @@
                     url('https://rdspt.com/fonts/Levitate/WebFonts/levitate_regular_v1.0-webfont.woff2') format('woff2'), 
                     url('https://rdspt.com/fonts/Levitate/WebFonts/levitate_regular_v1.0-webfont.woff' format('woff');
                 }
+
+@font-face{
+                    font-family: "ceefax";
+                    src:  url('https://rdspt.com/fonts/weekday_fonts/ceefax-teletext-4.ttf') format("truetype");
+                        }               
