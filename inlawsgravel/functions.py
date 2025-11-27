@@ -6,7 +6,7 @@ import os, glob
 
 
 def download_tour(komoot_url, authenticator, connector):
-    """downloads gpx file from komoot"""
+    """gets gpx file from komoot"""
     tour_id = komoot_url.split('/tour/')[1].split('?ref')[0]
     tour = connector.get_tour_by_id(tour_identifier=tour_id)
     tour.generate_gpx_track(authenticator)
