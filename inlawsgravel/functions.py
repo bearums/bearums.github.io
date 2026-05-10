@@ -135,15 +135,18 @@ def url_builder(gpx_numbers):
     url = url + url_end
     return url
 
-def make_page_with_all_routes():
-
+def generate_url_for_all_routes():
     gpxs = glob.glob('./gpxs/*.gpx')
-
     for g in gpxs:
         compress(g)
-
     gpx_numbers=[ Path(x).stem for x in sorted(glob.glob('./gpxs_subsampled/*.gpx'))]
     u = url_builder(gpx_numbers)
+
+    return u 
+
+def make_page_with_all_routes():
+
+    u = generate_url_for_all_routes()
 
     with open('template_all.html') as f:
         template = Template(f.read())
