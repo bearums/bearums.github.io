@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="https://www.komoot.de">
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
   <metadata>
-    <name>Sonntagsgravel 10.4.26 Ummigisbach</name>
-    <author>
-      <link href="https://www.komoot.de">
-        <text>komoot</text>
-        <type>text/html</type>
-      </link>
-    </author>
+    <name>056</name>
   </metadata>
   <wpt lat="50.768776" lon="7.219454">
     <name>Pleistal Cycle Path</name>
@@ -38,7 +32,7 @@
     <sym>Flag, Blue</sym>
   </wpt>
   <trk>
-    <name>Sonntagsgravel 10.4.26 Ummigisbach</name>
+    <name>056</name>
     <trkseg>
       <trkpt lat="50.734282" lon="7.104054">
       </trkpt>

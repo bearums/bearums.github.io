@@ -111,8 +111,13 @@ def compress(gpxfile, min_dist_m = 60):
     gpx.remove_elevation()
     gpx.remove_time()
     gpx.reduce_points(min_distance= min_dist_m) # reduce points 
+    for attr in ['creator', 'link', 'link_text', 'author_link', 'link_type']:
+        setattr(gpx, attr, None)
 
-
+    number= Path(gpxfile).stem
+    gpx.name= number # set name of track to number
+    gpx.tracks[0].name = gpx.name
+    
     gpx_name = (os.path.basename(gpxfile)) 
     outfile = 'gpxs_subsampled/'+ gpx_name
 

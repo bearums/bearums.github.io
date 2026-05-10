@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="https://www.komoot.de">
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
   <metadata>
-    <name>42/220 Pizza verdaune</name>
-    <author>
-      <link href="https://www.komoot.de">
-        <text>komoot</text>
-        <type>text/html</type>
-      </link>
-    </author>
+    <name>055</name>
   </metadata>
   <wpt lat="50.72538" lon="7.015497">
     <name>Narrow Path in Naturpark Rheinland</name>
@@ -34,7 +28,7 @@
     <sym>Flag, Blue</sym>
   </wpt>
   <trk>
-    <name>42/220 Pizza verdaune</name>
+    <name>055</name>
     <trkseg>
       <trkpt lat="50.734117" lon="7.104293">
       </trkpt>
