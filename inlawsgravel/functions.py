@@ -97,3 +97,57 @@ def make_gpx_page(url, page_name, desc=''):
     
     with open(page_name, 'w') as f:
         f.write(template.render(a_url = a_url, gpx_url=url, desc="DOWNLOAD"))
+
+
+# all routes on one page 
+import gpxpy
+from pathlib import Path
+
+
+def compress(gpxfile, min_dist_m = 60):
+    gpx_file = open(gpxfile, 'r')
+    gpx = gpxpy.parse(gpx_file)
+    
+    gpx.remove_elevation()
+    gpx.remove_time()
+    gpx.reduce_points(min_distance= min_dist_m) # reduce points 
+
+
+    gpx_name = (os.path.basename(gpxfile)) 
+    outfile = 'gpxs_subsampled/'+ gpx_name
+
+    if not os.path.isfile(outfile):
+        with open(outfile, 'w') as f:
+            f.write(gpx.to_xml())
+
+        
+def url_builder(gpx_numbers):
+    
+    #url_start='https://gpx.studio/app?files=%5B%22https%3A%2F%2Frdspt.com%2Finlawsgravel%2Fgpxs%2F%s.gpx'%gpx_numbers[0]
+    url_start='https://gpx.studio/app?files='+ urllib.parse.quote("""["https://rdspt.com/inlawsgravel/gpxs_subsampled/%s.gpx"""%gpx_numbers[0])
+    url= url_start
+    for g in gpx_numbers[1:]:
+        #url = url + "%22%2C%22%20https%3A%2F%2Frdspt.com%2Finlawsgravel%2Fgpxs%2F%s.gpx"%g
+        url = url + urllib.parse.quote(""""," https://rdspt.com/inlawsgravel/gpxs_subsampled/%s.gpx"""%g)
+        
+    url_end ="%22%5D#10.31/50.7281/7.1587"
+    
+    url = url + url_end
+    return url
+
+def make_page_with_all_routes():
+
+    gpxs = glob.glob('./gpxs/*.gpx')
+
+    for g in gpxs:
+        compress(g)
+
+    gpx_numbers=[ Path(x).stem for x in sorted(glob.glob('./gpxs_subsampled/*.gpx'))]
+    u = url_builder(gpx_numbers)
+
+    with open('template_all.html') as f:
+        template = Template(f.read())
+    with open('all.html', 'w') as f:
+        f.write(template.render(url = u ))
+
+    print('Page with all routes written!')
