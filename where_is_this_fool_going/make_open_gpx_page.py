@@ -22,21 +22,31 @@ def compress(gpxfile, min_dist_m = 60):
         
         
 gpxs = glob.glob('./gpxs/*.gpx')
-
+print(os.path.basename(gpxs[0]))
 for g in gpxs:
     compress(g)
     
     
-def url_builder(gpx_numbers):
+def url_builder(gpxs):
     
     #url_start='https://gpx.studio/app?files=%5B%22https%3A%2F%2Frdspt.com%2Finlawsgravel%2Fgpxs%2F%s.gpx'%gpx_numbers[0]
-    url_start='https://gpx.studio/app?files='+ urllib.parse.quote("""["https://rdspt.com/where_is_this_fool_going/gpxs_subsampled/%s.gpx"""%gpx_numbers[0])
+    #gpx_name = os.path.basename(gpx)
+    url_start='https://gpx.studio/app?files='+ urllib.parse.quote("""["https://rdspt.com/where_is_this_fool_going/gpxs_subsampled/%s"""%os.path.basename(gpxs[0]))
     url= url_start
-    for g in gpx_numbers[1:]:
+    for g in gpxs[1:]:
         #url = url + "%22%2C%22%20https%3A%2F%2Frdspt.com%2Finlawsgravel%2Fgpxs%2F%s.gpx"%g
-        url = url + urllib.parse.quote(""""," https://rdspt.com/where_is_this_fool_going/gpxs_subsampled/%s.gpx"""%g)
+        url = url + urllib.parse.quote(""""," https://rdspt.com/where_is_this_fool_going/gpxs_subsampled/%s.gpx"""%os.path.basename(g))
         
-    url_end ="%22%5D#10.31/50.7281/7.1587"
+    url_end ="%22%5D"##10.31/50.7281/7.1587"
     
     url = url + url_end
     return url
+    
+u = url_builder(gpxs)
+print(u)
+
+# write to html page
+with open('template_all.html') as f:
+        template = Template(f.read())
+with open('all.html', 'w') as f:
+        f.write(template.render(url = u ))
