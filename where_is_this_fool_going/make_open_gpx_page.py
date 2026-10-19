@@ -23,8 +23,8 @@ def compress(gpxfile, min_dist_m = 60):
         
 gpxs = glob.glob('./gpxs/*.gpx')
 gpxs=gpxs[:3]
-#for g in gpxs:
-#    compress(g)
+for g in gpxs:
+    compress(g)
     
     
 def url_builder(gpxs):
