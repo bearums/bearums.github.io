@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pouch pattern generator</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.9.0.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.9.0.min.js"></script>
+<script>
+Bokeh.set_log_level("info");
+</script>
+<script>
+(function(root, factory) {
+    factory(root["Bokeh"]);
+})(this, function(Bokeh) {
+  let define;
+  return (function outer(modules, entry) {
+  if (Bokeh != null) {
+    return Bokeh.register_plugin(modules, entry);
+  } else {
+    throw new Error("Cannot find Bokeh. You have to load it prior to loading plugins.");
+  }
+})
+({
+  "custom/main": function(require, module, exports) {
+    const models = {
+      "Pouch3D": require("custom/pouch3_d").Pouch3D
+    };
+    require("base").register_models(models);
+    module.exports = models;
+  },
+  "custom/pouch3_d": function(require, module, exports) {
+"use strict";
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pouch3D = exports.Pouch3DView = void 0;
+const layout_dom_1 = require("models/layouts/layout_dom");
+const dom_1 = require("core/dom");
+const slider_1 = require("models/widgets/sliders/slider");
+//import {NumericInput} from "models/widgets/numeric_input"
+const spinner_1 = require("models/widgets/spinner");
+class Pouch3DView extends layout_dom_1.LayoutDOMView {
+    constructor() {
+        super(...arguments);
+        this.is_dragging = false;
+        this.drag_start_x = 0;
+        this.drag_start_y = 0;
+        this.drag_start_azimuth = 0;
+        this.drag_start_elevation = 0;
+    }
+    get child_models() {
+        return [];
+    }
+    connect_signals() {
+        super.connect_signals();
+        this.connect(this.model.height_input.change, () => this.render_lines());
+        this.connect(this.model.depth_input.change, () => this.render_lines());
+        this.connect(this.model.t_width_input.change, () => this.render_lines());
+        this.connect(this.model.b_width_input.change, () => this.render_lines());
+        this.connect(this.model.zip_reach_slider.change, () => this.render_lines());
+        this.connect(this.model.zip_offset_slider.change, () => this.render_lines());
+        this.connect(this.model.properties.azimuth.change, () => this.render_lines());
+        this.connect(this.model.properties.elevation.change, () => this.render_lines());
+        this.connect(this.model.properties.zoom.change, () => this.render_lines());
+    }
+    render() {
+        super.render();
+        const width = this.model.width ?? 800;
+        const height = this.model.height ?? 800;
+        this.container_el = (0, dom_1.div)({ style: {
+                width: `${width + 20}px`,
+                height: `${height}px`,
+                background: this.model.background_color,
+                position: 'relative',
+                display: 'flex',
+                cursor: 'grab'
+            } });
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.container_el.appendChild(this.canvas);
+        this.setup_interactions();
+        this.shadow_el.appendChild(this.container_el);
+        this.ctx = this.canvas.getContext('2d');
+        this.render_lines();
+    }
+    setup_interactions() {
+        console.log('interactions');
+        if (!this.canvas)
+            return;
+        this.canvas.onmousedown = (e) => {
+            this.is_dragging = true;
+            this.drag_start_x = e.clientX;
+            this.drag_start_y = e.clientY;
+            this.drag_start_azimuth = this.model.azimuth;
+            this.drag_start_elevation = this.model.elevation;
+            this.container_el.style.cursor = 'grabbing';
+        };
+        this.canvas.onmousemove = (e) => {
+            if (this.is_dragging) {
+                const dx = e.clientX - this.drag_start_x;
+                const dy = e.clientY - this.drag_start_y;
+                const new_azimuth = this.drag_start_azimuth - dx * 0.5;
+                this.model.azimuth = ((new_azimuth % 360) + 360) % 360;
+                const new_elevation = this.drag_start_elevation - dy * 0.5;
+                this.model.elevation = Math.max(-90, Math.min(90, new_elevation));
+            }
+        };
+        this.canvas.onmouseup = () => {
+            this.is_dragging = false;
+            this.container_el.style.cursor = 'grab';
+        };
+        this.canvas.onmouseleave = () => {
+            this.is_dragging = false;
+            this.container_el.style.cursor = 'grab';
+            if (this.tooltip_el)
+                this.tooltip_el.style.display = 'none';
+        };
+        this.canvas.onwheel = (e) => {
+            e.preventDefault();
+            const delta = -Math.sign(e.deltaY) * 0.1;
+            const new_zoom = this.model.zoom + delta;
+            this.model.zoom = Math.max(0.5, Math.min(8.0, new_zoom));
+        };
+    }
+    get_lines() {
+        const pouch_height = this.model.height_input.value;
+        const depth = this.model.depth_input.value;
+        const top_width = this.model.t_width_input.value;
+        const bottom_width = this.model.b_width_input.value;
+        const zip_reach = this.model.zip_reach_slider.value;
+        const zip_offset = this.model.zip_offset_slider.value;
+        const vertex_points = [[0.5 * bottom_width, -0.5 * depth, 0],
+            [0.5 * bottom_width, 0.5 * depth, 0],
+            [-0.5 * bottom_width, 0.5 * depth, 0],
+            [-0.5 * bottom_width, -0.5 * depth, 0],
+            [0.5 * top_width, -0.5 * depth, pouch_height],
+            [0.5 * top_width, 0.5 * depth, pouch_height],
+            [-0.5 * top_width, 0.5 * depth, pouch_height],
+            [-0.5 * top_width, -0.5 * depth, pouch_height]];
+        const zip_points = [[0.5 * top_width - (zip_reach) * 0.01 * (0.5 * top_width - 0.5 * bottom_width), 0 + zip_offset * 0.01 * 0.5 * depth, (100 - zip_reach) * 0.01 * pouch_height],
+            [0.5 * top_width, 0 + zip_offset * 0.01 * 0.5 * depth, pouch_height],
+            [-0.5 * top_width, 0 + zip_offset * 0.01 * 0.5 * depth, pouch_height],
+            [-0.5 * top_width + (zip_reach) * 0.01 * (0.5 * top_width - 0.5 * bottom_width), 0 + zip_offset * 0.01 * 0.5 * depth, (100 - zip_reach) * 0.01 * pouch_height]];
+        const lines_to_draw = [[vertex_points[0], vertex_points[1]],
+            [vertex_points[1], vertex_points[2]],
+            [vertex_points[2], vertex_points[3]],
+            [vertex_points[0], vertex_points[3]],
+            [vertex_points[2], vertex_points[3]],
+            [vertex_points[4], vertex_points[5]],
+            [vertex_points[5], vertex_points[6]],
+            [vertex_points[6], vertex_points[7]],
+            [vertex_points[4], vertex_points[7]],
+            [vertex_points[0], vertex_points[4]],
+            [vertex_points[1], vertex_points[5]],
+            [vertex_points[2], vertex_points[6]],
+            [vertex_points[3], vertex_points[7]],
+            [[zip_points[0][0], -0.5 * depth, zip_points[0][2]], [zip_points[0][0], 0.5 * depth, zip_points[0][2]]],
+            [[zip_points[3][0], -0.5 * depth, zip_points[3][2]], [zip_points[3][0], 0.5 * depth, zip_points[3][2]]],
+            [zip_points[0], zip_points[1]],
+            [zip_points[1], zip_points[2]],
+            [zip_points[2], zip_points[3]],
+        ];
+        //const all_points = vertex_points.concat(zip_points)                        
+        return lines_to_draw;
+    }
+    render_lines() {
+        const lines_to_draw = this.get_lines();
+        if (!this.ctx || !this.canvas)
+            return;
+        const ctx = this.ctx;
+        const width = this.canvas.width;
+        const height = this.canvas.height;
+        ctx.fillStyle = this.model.background_color;
+        ctx.fillRect(0, 0, width, height);
+        const elev_rad = this.model.elevation * Math.PI / 180;
+        const azim_rad = this.model.azimuth * Math.PI / 180;
+        const zoom = this.model.zoom;
+        const points = lines_to_draw;
+        const x_data = [];
+        const y_data = [];
+        const z_data = [];
+        var cc = 0;
+        for (let i = 0; i < points.length; i++) {
+            for (let ctr = 0; ctr < 2; ctr++) {
+                x_data[cc] = points[i][ctr][0];
+                y_data[cc] = points[i][ctr][1];
+                z_data[cc] = points[i][ctr][2];
+                cc = cc + 1;
+            }
+        }
+        if (x_data.length === 0)
+            return;
+        // Calculate bounds
+        const data_x_min = Math.min(...x_data);
+        const data_x_max = Math.max(...x_data);
+        const data_y_min = Math.min(...y_data);
+        const data_y_max = Math.max(...y_data);
+        const data_z_min = Math.min(...z_data);
+        const data_z_max = Math.max(...z_data);
+        const data_range = Math.max(data_x_max - data_x_min, data_y_max - data_y_min, data_z_max - data_z_min);
+        const scale = (Math.min(width, height) / data_range) * 0.6 * zoom;
+        const cx = width / 2;
+        const cy = height / 2;
+        const data_center_x = (data_x_min + data_x_max) / 2;
+        const data_center_y = (data_y_min + data_y_max) / 2;
+        const data_center_z = (data_z_min + data_z_max) / 2;
+        const center_x_rot = data_center_x * Math.cos(azim_rad) - data_center_y * Math.sin(azim_rad);
+        const center_y_rot = data_center_x * Math.sin(azim_rad) + data_center_y * Math.cos(azim_rad);
+        const center_x_proj = center_x_rot;
+        const center_z_proj = center_y_rot * Math.sin(elev_rad) + data_center_z * Math.cos(elev_rad);
+        // Draw line segments
+        for (let i = 0; i < points.length; i++) {
+            const x1 = points[i][0][0];
+            const y1 = points[i][0][1];
+            const z1 = points[i][0][2];
+            const x2 = points[i][1][0];
+            const y2 = points[i][1][1];
+            const z2 = points[i][1][2];
+            // Project both points
+            const x1_rot = x1 * Math.cos(azim_rad) - y1 * Math.sin(azim_rad);
+            const y1_rot = x1 * Math.sin(azim_rad) + y1 * Math.cos(azim_rad);
+            const x1_proj = x1_rot;
+            const z1_proj = y1_rot * Math.sin(elev_rad) + z1 * Math.cos(elev_rad);
+            const x2_rot = x2 * Math.cos(azim_rad) - y2 * Math.sin(azim_rad);
+            const y2_rot = x2 * Math.sin(azim_rad) + y2 * Math.cos(azim_rad);
+            const x2_proj = x2_rot;
+            const z2_proj = y2_rot * Math.sin(elev_rad) + z2 * Math.cos(elev_rad);
+            const screen_x1 = cx + (x1_proj - center_x_proj) * scale;
+            const screen_y1 = cy - (z1_proj - center_z_proj) * scale;
+            const screen_x2 = cx + (x2_proj - center_x_proj) * scale;
+            const screen_y2 = cy - (z2_proj - center_z_proj) * scale;
+            var color;
+            var line_width;
+            if (i < 15) {
+                color = "#000000";
+                line_width = this.model.line_width;
+            }
+            else {
+                color = "#0000FF";
+                line_width = 3 * this.model.line_width;
+            }
+            ctx.strokeStyle = color;
+            ctx.lineWidth = line_width;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            ctx.moveTo(screen_x1, screen_y1);
+            ctx.lineTo(screen_x2, screen_y2);
+            ctx.stroke();
+        }
+    }
+    remove() {
+        super.remove();
+    }
+}
+exports.Pouch3DView = Pouch3DView;
+Pouch3DView.__name__ = "Pouch3DView";
+class Pouch3D extends layout_dom_1.LayoutDOM {
+    constructor(attrs) {
+        super(attrs);
+    }
+}
+exports.Pouch3D = Pouch3D;
+_a = Pouch3D;
+Pouch3D.__name__ = "Pouch3D";
+(() => {
+    _a.prototype.default_view = Pouch3DView;
+    _a.define(({ Float, List, String, Any, Ref }) => ({
+        x: [List(Float), []],
+        y: [List(Float), []],
+        z: [List(Float), []],
+        points: [Any, []],
+        line_width: [Float, 2.0],
+        azimuth: [Float, 45],
+        elevation: [Float, 30],
+        zoom: [Float, 1.0],
+        background_color: [String, '#0a0a0a'],
+        height_input: [Ref(spinner_1.Spinner)],
+        depth_input: [Ref(spinner_1.Spinner)],
+        t_width_input: [Ref(spinner_1.Spinner)],
+        b_width_input: [Ref(spinner_1.Spinner)],
+        zip_reach_slider: [Ref(slider_1.Slider)],
+        zip_offset_slider: [Ref(slider_1.Slider)]
+    }));
+})();
+//# sourceMappingURL=pouch3d.js.map
+}
+}, "custom/main");
+;
+});
+
+</script>
+  </head>
+  <body>
+    <div id="aba5113d-cf87-4ea3-abc3-8e0e47ff4970" data-root-id="p1017" style="display: contents;"></div>
+  
+    <script type="application/json" id="bbbcf78e-7e6b-42eb-aa97-4d40c3e25190">
+      {"214d133d-419f-435c-bbde-66b130487c78":{"version":"3.9.0","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"p1018","attributes":{"notifications":{"type":"object","name":"Notifications","id":"p1019"}}},"roots":[{"type":"object","name":"Row","id":"p1017","attributes":{"children":[{"type":"object","name":"Pouch3D","id":"p1014","attributes":{"width":800,"height":800,"elevation":20,"background_color":"#ffffff","height_input":{"type":"object","name":"Spinner","id":"p1008","attributes":{"title":"Height (cm)","value":10,"low":1,"high":30}},"depth_input":{"type":"object","name":"Spinner","id":"p1009","attributes":{"title":"Depth (cm)","value":4,"low":1,"high":30}},"t_width_input":{"type":"object","name":"Spinner","id":"p1010","attributes":{"title":"Top width (cm)","value":18,"low":1,"high":30}},"b_width_input":{"type":"object","name":"Spinner","id":"p1011","attributes":{"title":"Bottom width (cm)","value":22,"low":1,"high":30}},"zip_reach_slider":{"type":"object","name":"Slider","id":"p1012","attributes":{"title":"Zip reach (%)","start":10,"end":90,"value":50,"step":5}},"zip_offset_slider":{"type":"object","name":"Slider","id":"p1013","attributes":{"title":"Zip offset (%)","start":0,"end":90,"value":0,"step":5}}}},{"type":"object","name":"Column","id":"p1016","attributes":{"children":[{"id":"p1008"},{"id":"p1009"},{"type":"object","name":"Row","id":"p1015","attributes":{"children":[{"id":"p1010"},{"id":"p1011"}]}},{"id":"p1012"},{"id":"p1013"}]}}]}}]}}
+    </script>
+    <script>
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('bbbcf78e-7e6b-42eb-aa97-4d40c3e25190').textContent;
+              const render_items = [{"docid":"214d133d-419f-435c-bbde-66b130487c78","roots":{"p1017":"aba5113d-cf87-4ea3-abc3-8e0e47ff4970"},"root_ids":["p1017"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

@@ -10,7 +10,7 @@ def compress(gpxfile, min_dist_m = 60):
     gpx_file = open(gpxfile, 'r')
     gpx = gpxpy.parse(gpx_file)
     
-    gpx.remove_elevation()
+    #gpx.remove_elevation()
     gpx.remove_time()
     gpx.reduce_points(min_distance= min_dist_m) # reduce points 
 
