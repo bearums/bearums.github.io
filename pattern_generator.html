@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pouch pattern generator</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.9.0.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.9.0.min.js"></script>
+<script>
+Bokeh.set_log_level("info");
+</script>
+<script>
+(function(root, factory) {
+    factory(root["Bokeh"]);
+})(this, function(Bokeh) {
+  let define;
+  return (function outer(modules, entry) {
+  if (Bokeh != null) {
+    return Bokeh.register_plugin(modules, entry);
+  } else {
+    throw new Error("Cannot find Bokeh. You have to load it prior to loading plugins.");
+  }
+})
+({
+  "custom/main": function(require, module, exports) {
+    const models = {
+      "Pouch3D": require("custom/pouch_view.view.pouch3_d").Pouch3D
+    };
+    require("base").register_models(models);
+    module.exports = models;
+  },
+  "custom/pouch_view.view.pouch3_d": function(require, module, exports) {
+"use strict";
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pouch3D = exports.Pouch3DView = void 0;
+const layout_dom_1 = require("models/layouts/layout_dom");
+const dom_1 = require("core/dom");
+const slider_1 = require("models/widgets/sliders/slider");
+//import {NumericInput} from "models/widgets/numeric_input"
+const spinner_1 = require("models/widgets/spinner");
+class Pouch3DView extends layout_dom_1.LayoutDOMView {
+    constructor() {
+        super(...arguments);
+        this.is_dragging = false;
+        this.drag_start_x = 0;
+        this.drag_start_y = 0;
+        this.drag_start_azimuth = 0;
+        this.drag_start_elevation = 0;
+    }
+    get child_models() {
+        return [];
+    }
+    connect_signals() {
+        super.connect_signals();
+        this.connect(this.model.height_input.change, () => this.render_lines());
+        this.connect(this.model.depth_input.change, () => this.render_lines());
+        this.connect(this.model.t_width_input.change, () => this.render_lines());
+        this.connect(this.model.b_width_input.change, () => this.render_lines());
+        this.connect(this.model.zip_reach_slider.change, () => this.render_lines());
+        this.connect(this.model.zip_offset_slider.change, () => this.render_lines());
+        this.connect(this.model.properties.azimuth.change, () => this.render_lines());
+        this.connect(this.model.properties.elevation.change, () => this.render_lines());
+        this.connect(this.model.properties.zoom.change, () => this.render_lines());
+    }
+    render() {
+        super.render();
+        const width = this.model.width ?? 800;
+        const height = this.model.height ?? 800;
+        this.container_el = (0, dom_1.div)({ style: {
+                width: `${width + 20}px`,
+                height: `${height}px`,
+                background: this.model.background_color,
+                position: 'relative',
+                display: 'flex',
+                cursor: 'grab'
+            } });
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.container_el.appendChild(this.canvas);
+        this.setup_interactions();
+        this.shadow_el.appendChild(this.container_el);
+        this.ctx = this.canvas.getContext('2d');
+        this.render_lines();
+    }
+    setup_interactions() {
+        console.log('interactions');
+        if (!this.canvas)
+            return;
+        this.canvas.onmousedown = (e) => {
+            this.is_dragging = true;
+            this.drag_start_x = e.clientX;
+            this.drag_start_y = e.clientY;
+            this.drag_start_azimuth = this.model.azimuth;
+            this.drag_start_elevation = this.model.elevation;
+            this.container_el.style.cursor = 'grabbing';
+        };
+        this.canvas.onmousemove = (e) => {
+            if (this.is_dragging) {
+                const dx = e.clientX - this.drag_start_x;
+                const dy = e.clientY - this.drag_start_y;
+                const new_azimuth = this.drag_start_azimuth - dx * 0.5;
+                this.model.azimuth = ((new_azimuth % 360) + 360) % 360;
+                const new_elevation = this.drag_start_elevation - dy * 0.5;
+                this.model.elevation = Math.max(-90, Math.min(90, new_elevation));
+            }
+        };
+        this.canvas.onmouseup = () => {
+            this.is_dragging = false;
+            this.container_el.style.cursor = 'grab';
+        };
+        this.canvas.onmouseleave = () => {
+            this.is_dragging = false;
+            this.container_el.style.cursor = 'grab';
+            if (this.tooltip_el)
+                this.tooltip_el.style.display = 'none';
+        };
+        this.canvas.onwheel = (e) => {
+            e.preventDefault();
+            const delta = -Math.sign(e.deltaY) * 0.1;
+            const new_zoom = this.model.zoom + delta;
+            this.model.zoom = Math.max(0.5, Math.min(8.0, new_zoom));
+        };
+    }
+    get_lines() {
+        const pouch_height = this.model.height_input.value;
+        const depth = this.model.depth_input.value;
+        const top_width = this.model.t_width_input.value;
+        const bottom_width = this.model.b_width_input.value;
+        const zip_reach = this.model.zip_reach_slider.value;
+        const zip_offset = this.model.zip_offset_slider.value;
+        const vertex_points = [[0.5 * bottom_width, -0.5 * depth, 0],
+            [0.5 * bottom_width, 0.5 * depth, 0],
+            [-0.5 * bottom_width, 0.5 * depth, 0],
+            [-0.5 * bottom_width, -0.5 * depth, 0],
+            [0.5 * top_width, -0.5 * depth, pouch_height],
+            [0.5 * top_width, 0.5 * depth, pouch_height],
+            [-0.5 * top_width, 0.5 * depth, pouch_height],
+            [-0.5 * top_width, -0.5 * depth, pouch_height]];
+        const zip_points = [[0.5 * top_width - (zip_reach) * 0.01 * (0.5 * top_width - 0.5 * bottom_width), 0 + zip_offset * 0.01 * 0.5 * depth, (100 - zip_reach) * 0.01 * pouch_height],
+            [0.5 * top_width, 0 + zip_offset * 0.01 * 0.5 * depth, pouch_height],
+            [-0.5 * top_width, 0 + zip_offset * 0.01 * 0.5 * depth, pouch_height],
+            [-0.5 * top_width + (zip_reach) * 0.01 * (0.5 * top_width - 0.5 * bottom_width), 0 + zip_offset * 0.01 * 0.5 * depth, (100 - zip_reach) * 0.01 * pouch_height]];
+        const lines_to_draw = [[vertex_points[0], vertex_points[1]],
+            [vertex_points[1], vertex_points[2]],
+            [vertex_points[2], vertex_points[3]],
+            [vertex_points[0], vertex_points[3]],
+            [vertex_points[2], vertex_points[3]],
+            [vertex_points[4], vertex_points[5]],
+            [vertex_points[5], vertex_points[6]],
+            [vertex_points[6], vertex_points[7]],
+            [vertex_points[4], vertex_points[7]],
+            [vertex_points[0], vertex_points[4]],
+            [vertex_points[1], vertex_points[5]],
+            [vertex_points[2], vertex_points[6]],
+            [vertex_points[3], vertex_points[7]],
+            [[zip_points[0][0], -0.5 * depth, zip_points[0][2]], [zip_points[0][0], 0.5 * depth, zip_points[0][2]]],
+            [[zip_points[3][0], -0.5 * depth, zip_points[3][2]], [zip_points[3][0], 0.5 * depth, zip_points[3][2]]],
+            [zip_points[0], zip_points[1]],
+            [zip_points[1], zip_points[2]],
+            [zip_points[2], zip_points[3]],
+        ];
+        //const all_points = vertex_points.concat(zip_points)                        
+        return lines_to_draw;
+    }
+    render_lines() {
+        const lines_to_draw = this.get_lines();
+        if (!this.ctx || !this.canvas)
+            return;
+        const ctx = this.ctx;
+        const width = this.canvas.width;
+        const height = this.canvas.height;
+        ctx.fillStyle = this.model.background_color;
+        ctx.fillRect(0, 0, width, height);
+        const elev_rad = this.model.elevation * Math.PI / 180;
+        const azim_rad = this.model.azimuth * Math.PI / 180;
+        const zoom = this.model.zoom;
+        const points = lines_to_draw;
+        const x_data = [];
+        const y_data = [];
+        const z_data = [];
+        var cc = 0;
+        for (let i = 0; i < points.length; i++) {
+            for (let ctr = 0; ctr < 2; ctr++) {
+                x_data[cc] = points[i][ctr][0];
+                y_data[cc] = points[i][ctr][1];
+                z_data[cc] = points[i][ctr][2];
+                cc = cc + 1;
+            }
+        }
+        if (x_data.length === 0)
+            return;
+        // Calculate bounds
+        const data_x_min = Math.min(...x_data);
+        const data_x_max = Math.max(...x_data);
+        const data_y_min = Math.min(...y_data);
+        const data_y_max = Math.max(...y_data);
+        const data_z_min = Math.min(...z_data);
+        const data_z_max = Math.max(...z_data);
+        const data_range = Math.max(data_x_max - data_x_min, data_y_max - data_y_min, data_z_max - data_z_min);
+        const scale = (Math.min(width, height) / data_range) * 0.6 * zoom;
+        const cx = width / 2;
+        const cy = height / 2;
+        const data_center_x = (data_x_min + data_x_max) / 2;
+        const data_center_y = (data_y_min + data_y_max) / 2;
+        const data_center_z = (data_z_min + data_z_max) / 2;
+        const center_x_rot = data_center_x * Math.cos(azim_rad) - data_center_y * Math.sin(azim_rad);
+        const center_y_rot = data_center_x * Math.sin(azim_rad) + data_center_y * Math.cos(azim_rad);
+        const center_x_proj = center_x_rot;
+        const center_z_proj = center_y_rot * Math.sin(elev_rad) + data_center_z * Math.cos(elev_rad);
+        // Draw line segments
+        for (let i = 0; i < points.length; i++) {
+            const x1 = points[i][0][0];
+            const y1 = points[i][0][1];
+            const z1 = points[i][0][2];
+            const x2 = points[i][1][0];
+            const y2 = points[i][1][1];
+            const z2 = points[i][1][2];
+            // Project both points
+            const x1_rot = x1 * Math.cos(azim_rad) - y1 * Math.sin(azim_rad);
+            const y1_rot = x1 * Math.sin(azim_rad) + y1 * Math.cos(azim_rad);
+            const x1_proj = x1_rot;
+            const z1_proj = y1_rot * Math.sin(elev_rad) + z1 * Math.cos(elev_rad);
+            const x2_rot = x2 * Math.cos(azim_rad) - y2 * Math.sin(azim_rad);
+            const y2_rot = x2 * Math.sin(azim_rad) + y2 * Math.cos(azim_rad);
+            const x2_proj = x2_rot;
+            const z2_proj = y2_rot * Math.sin(elev_rad) + z2 * Math.cos(elev_rad);
+            const screen_x1 = cx + (x1_proj - center_x_proj) * scale;
+            const screen_y1 = cy - (z1_proj - center_z_proj) * scale;
+            const screen_x2 = cx + (x2_proj - center_x_proj) * scale;
+            const screen_y2 = cy - (z2_proj - center_z_proj) * scale;
+            var color;
+            var line_width;
+            if (i < 15) {
+                color = "#000000";
+                line_width = this.model.line_width;
+            }
+            else {
+                color = "#0000FF";
+                line_width = 3 * this.model.line_width;
+            }
+            ctx.strokeStyle = color;
+            ctx.lineWidth = line_width;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            ctx.moveTo(screen_x1, screen_y1);
+            ctx.lineTo(screen_x2, screen_y2);
+            ctx.stroke();
+        }
+    }
+    remove() {
+        super.remove();
+    }
+}
+exports.Pouch3DView = Pouch3DView;
+Pouch3DView.__name__ = "Pouch3DView";
+class Pouch3D extends layout_dom_1.LayoutDOM {
+    constructor(attrs) {
+        super(attrs);
+    }
+}
+exports.Pouch3D = Pouch3D;
+_a = Pouch3D;
+Pouch3D.__name__ = "Pouch3D";
+(() => {
+    _a.prototype.default_view = Pouch3DView;
+    _a.define(({ Float, List, String, Any, Ref }) => ({
+        x: [List(Float), []],
+        y: [List(Float), []],
+        z: [List(Float), []],
+        points: [Any, []],
+        line_width: [Float, 2.0],
+        azimuth: [Float, 45],
+        elevation: [Float, 30],
+        zoom: [Float, 1.0],
+        background_color: [String, '#0a0a0a'],
+        height_input: [Ref(spinner_1.Spinner)],
+        depth_input: [Ref(spinner_1.Spinner)],
+        t_width_input: [Ref(spinner_1.Spinner)],
+        b_width_input: [Ref(spinner_1.Spinner)],
+        zip_reach_slider: [Ref(slider_1.Slider)],
+        zip_offset_slider: [Ref(slider_1.Slider)]
+    }));
+})();
+//# sourceMappingURL=pouch3d.js.map
+}
+}, "custom/main");
+;
+});
+
+</script>
+  </head>
+  <body>
+    <div id="aded6d96-bc88-4379-9f72-aa8f2d4af273" data-root-id="p1020" style="display: contents;"></div>
+  
+    <script type="application/json" id="e1efa900-16d1-45bc-b8f4-bee11657aaa8">
+      {"67b7d5ca-507c-4c59-a210-ffc40c0de361":{"version":"3.9.0","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"p1021","attributes":{"notifications":{"type":"object","name":"Notifications","id":"p1022"}}},"roots":[{"type":"object","name":"Row","id":"p1020","attributes":{"children":[{"type":"object","name":"Pouch3D","id":"p1017","attributes":{"width":800,"height":800,"elevation":20,"background_color":"#ffffff","height_input":{"type":"object","name":"Spinner","id":"p1008","attributes":{"title":"Height (cm)","value":10,"low":1,"high":30}},"depth_input":{"type":"object","name":"Spinner","id":"p1009","attributes":{"title":"Depth (cm)","value":4,"low":1,"high":30}},"t_width_input":{"type":"object","name":"Spinner","id":"p1010","attributes":{"title":"Top width (cm)","value":18,"low":1,"high":30}},"b_width_input":{"type":"object","name":"Spinner","id":"p1011","attributes":{"title":"Bottom width (cm)","value":22,"low":1,"high":30}},"zip_reach_slider":{"type":"object","name":"Slider","id":"p1012","attributes":{"title":"Zip reach (%)","start":10,"end":90,"value":50,"step":5}},"zip_offset_slider":{"type":"object","name":"Slider","id":"p1013","attributes":{"title":"Zip offset (%)","start":0,"end":90,"value":0,"step":5}}}},{"type":"object","name":"Column","id":"p1019","attributes":{"children":[{"id":"p1008"},{"id":"p1009"},{"type":"object","name":"Row","id":"p1018","attributes":{"children":[{"id":"p1010"},{"id":"p1011"}]}},{"id":"p1012"},{"id":"p1013"},{"type":"object","name":"Select","id":"p1014","attributes":{"title":"Seam allowance","options":["0","0.5","1"],"value":"1"}},{"type":"object","name":"Button","id":"p1015","attributes":{"button_type":"success","js_event_callbacks":{"type":"map","entries":[["button_click",[{"type":"object","name":"CustomJS","id":"p1016","attributes":{"args":{"type":"map","entries":[["params",{"type":"map","entries":[["height_input",{"id":"p1008"}],["depth_input",{"id":"p1009"}],["top_width_input",{"id":"p1010"}],["bottom_width_input",{"id":"p1011"}],["zip_reach_input",{"id":"p1012"}],["zip_offset_input",{"id":"p1013"}],["seam_allowance_input",{"id":"p1014"}],["template","&lt;?xml version=\"1.0\" encoding=\"utf-8\" ?&gt;\n&lt;svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" baseProfile=\"full\"  version=\"1.1\" \nheight=\"{{canvas_height}}cm\" width=\"{{canvas_width}}cm\"&gt;\n&lt;style&gt;\n.line_x {\n\tstroke: rgb(0,100,0);\n\tstroke-width: 3px;\n    stroke-linecap: square;\n}\n.line_SA {\n\tstroke: rgb(0,0,200);\n\tstroke-width: 3px;\n    stroke-linecap: square;\n}\n\n.red_dotted {\n\tstroke: rgb(255,0,0);\n\tstroke-width: 2px;\n    stroke-linecap: square;\n    stroke-dasharray: 12,12;\n}\n\n&lt;/style&gt;\n  &lt;defs/&gt;\n  \n  &lt;g id=\"Q1\"&gt;\n      &lt;line id=\"AB\" class=\"line_x\" x1=\"{{Ax}}cm\" x2=\"{{Bx}}cm\" y1=\"{{Ay}}cm\" y2=\"{{By}}cm\"/&gt;\n      &lt;line id=\"BC\" class=\"line_x\" x1=\"{{Bx}}cm\" x2=\"{{Cx}}cm\" y1=\"{{By}}cm\" y2=\"{{Cy}}cm\"/&gt;\n      &lt;line id=\"CD\" class=\"line_x\" x1=\"{{Cx}}cm\" x2=\"{{Dx}}cm\" y1=\"{{Cy}}cm\" y2=\"{{Dy}}cm\"/&gt;\n      &lt;line id=\"DE\" class=\"line_x\" x1=\"{{Dx}}cm\" x2=\"{{Ex}}cm\" y1=\"{{Dy}}cm\" y2=\"{{Ey}}cm\"/&gt;\n      &lt;line id=\"EF\" class=\"line_x\" x1=\"{{Ex}}cm\" x2=\"{{Fx}}cm\" y1=\"{{Ey}}cm\" y2=\"{{Fy}}cm\"/&gt;\n      &lt;line id=\"FG\" class=\"line_x\" x1=\"{{Fx}}cm\" x2=\"{{Gx}}cm\" y1=\"{{Fy}}cm\" y2=\"{{Gy}}cm\"/&gt;\n\n      &lt;line id=\"Symmetry_1\" class=\"red_dotted\" x1=\"{{Ax}}cm\" x2=\"{{Ax}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Ay}}cm\"/&gt;\n      &lt;line id=\"Symmetry_2\" class=\"red_dotted\" x1=\"{{Ax}}cm\" x2=\"{{Gx}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Gy}}cm\"/&gt;\n\n      &lt;line id=\"BC_sa\" class=\"line_SA\" x1=\"{{B_sax}}cm\" x2=\"{{C_sax}}cm\" y1=\"{{B_say}}cm\" y2=\"{{C_say}}cm\"/&gt;\n      &lt;line id=\"CD_sa\" class=\"line_SA\" x1=\"{{C_sax}}cm\" x2=\"{{D_sax}}cm\" y1=\"{{C_say}}cm\" y2=\"{{D_say}}cm\"/&gt;\n      &lt;line id=\"DE_sa\" class=\"line_SA\" x1=\"{{D_sax}}cm\" x2=\"{{E_sax}}cm\" y1=\"{{D_say}}cm\" y2=\"{{E_say}}cm\"/&gt;\n      &lt;line id=\"EF_sa\" class=\"line_SA\" x1=\"{{E_sax}}cm\" x2=\"{{F_sax}}cm\" y1=\"{{E_say}}cm\" y2=\"{{F_say}}cm\"/&gt;\n      &lt;line id=\"FG_sa\" class=\"line_SA\" x1=\"{{F_sax}}cm\" x2=\"{{G_sax}}cm\" y1=\"{{F_say}}cm\" y2=\"{{G_say}}cm\"/&gt;\n\n  &lt;/g&gt;\n  \n  &lt;g id=\"Q2\"&gt;\n      &lt;line id=\"GH\" class=\"line_x\" x1=\"{{Gx}}cm\" x2=\"{{Hx}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Hy}}cm\"/&gt;\n      &lt;line id=\"HI\" class=\"line_x\" x1=\"{{Hx}}cm\" x2=\"{{Ix}}cm\" y1=\"{{Hy}}cm\" y2=\"{{Iy}}cm\"/&gt;\n      &lt;line id=\"IJ\" class=\"line_x\" x1=\"{{Ix}}cm\" x2=\"{{Jx}}cm\" y1=\"{{Iy}}cm\" y2=\"{{Jy}}cm\"/&gt;\n      &lt;line id=\"JK\" class=\"line_x\" x1=\"{{Jx}}cm\" x2=\"{{Kx}}cm\" y1=\"{{Jy}}cm\" y2=\"{{Ky}}cm\"/&gt;\n      &lt;line id=\"KL\" class=\"line_x\" x1=\"{{Kx}}cm\" x2=\"{{Lx}}cm\" y1=\"{{Ky}}cm\" y2=\"{{Ly}}cm\"/&gt;\n      &lt;line id=\"LM\" class=\"line_x\" x1=\"{{Lx}}cm\" x2=\"{{Mx}}cm\" y1=\"{{Ly}}cm\" y2=\"{{My}}cm\"/&gt;\n\n      &lt;line id=\"Symmetry_1\" class=\"red_dotted\" x1=\"{{Ax}}cm\" x2=\"{{Ax}}cm\" y1=\"{{Gy}}cm\" y2=\"{{My}}cm\"/&gt;\n      &lt;line id=\"Symmetry_2\" class=\"red_dotted\" x1=\"{{Ax}}cm\" x2=\"{{Gx}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Gy}}cm\"/&gt;\n\n      &lt;line id=\"BC_sa\" class=\"line_SA\" x1=\"{{G_sax}}cm\" x2=\"{{H_sax}}cm\" y1=\"{{G_say}}cm\" y2=\"{{H_say}}cm\"/&gt;\n      &lt;line id=\"CD_sa\" class=\"line_SA\" x1=\"{{H_sax}}cm\" x2=\"{{I_sax}}cm\" y1=\"{{H_say}}cm\" y2=\"{{I_say}}cm\"/&gt;\n      &lt;line id=\"DE_sa\" class=\"line_SA\" x1=\"{{I_sax}}cm\" x2=\"{{J_sax}}cm\" y1=\"{{I_say}}cm\" y2=\"{{J_say}}cm\"/&gt;\n      &lt;line id=\"EF_sa\" class=\"line_SA\" x1=\"{{J_sax}}cm\" x2=\"{{K_sax}}cm\" y1=\"{{J_say}}cm\" y2=\"{{K_say}}cm\"/&gt;\n      &lt;line id=\"FG_sa\" class=\"line_SA\" x1=\"{{K_sax}}cm\" x2=\"{{L_sax}}cm\" y1=\"{{K_say}}cm\" y2=\"{{L_say}}cm\"/&gt;\n   &lt;/g&gt;\n   \n   &lt;g id=\"Q3\"&gt;\n      &lt;line id=\"AB\" class=\"line_x\" x1=\"{{Ax_}}cm\" x2=\"{{Bx_}}cm\" y1=\"{{Ay}}cm\" y2=\"{{By}}cm\"/&gt;\n      &lt;line id=\"BC\" class=\"line_x\" x1=\"{{Bx_}}cm\" x2=\"{{Cx_}}cm\" y1=\"{{By}}cm\" y2=\"{{Cy}}cm\"/&gt;\n      &lt;line id=\"CD\" class=\"line_x\" x1=\"{{Cx_}}cm\" x2=\"{{Dx_}}cm\" y1=\"{{Cy}}cm\" y2=\"{{Dy}}cm\"/&gt;\n      &lt;line id=\"DE\" class=\"line_x\" x1=\"{{Dx_}}cm\" x2=\"{{Ex_}}cm\" y1=\"{{Dy}}cm\" y2=\"{{Ey}}cm\"/&gt;\n      &lt;line id=\"EF\" class=\"line_x\" x1=\"{{Ex_}}cm\" x2=\"{{Fx_}}cm\" y1=\"{{Ey}}cm\" y2=\"{{Fy}}cm\"/&gt;\n      &lt;line id=\"FG\" class=\"line_x\" x1=\"{{Fx_}}cm\" x2=\"{{Gx_}}cm\" y1=\"{{Fy}}cm\" y2=\"{{Gy}}cm\"/&gt;\n\n      &lt;line id=\"Symmetry_1\" class=\"red_dotted\" x1=\"{{Ax}}cm\" x2=\"{{Ax}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Ay}}cm\"/&gt;\n      &lt;line id=\"Symmetry_2\" class=\"red_dotted\" x1=\"{{Ax_}}cm\" x2=\"{{Gx_}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Gy}}cm\"/&gt;\n\n      &lt;line id=\"BC_sa\" class=\"line_SA\" x1=\"{{B_sax_}}cm\" x2=\"{{C_sax_}}cm\" y1=\"{{B_say}}cm\" y2=\"{{C_say}}cm\"/&gt;\n      &lt;line id=\"CD_sa\" class=\"line_SA\" x1=\"{{C_sax_}}cm\" x2=\"{{D_sax_}}cm\" y1=\"{{C_say}}cm\" y2=\"{{D_say}}cm\"/&gt;\n      &lt;line id=\"DE_sa\" class=\"line_SA\" x1=\"{{D_sax_}}cm\" x2=\"{{E_sax_}}cm\" y1=\"{{D_say}}cm\" y2=\"{{E_say}}cm\"/&gt;\n      &lt;line id=\"EF_sa\" class=\"line_SA\" x1=\"{{E_sax_}}cm\" x2=\"{{F_sax_}}cm\" y1=\"{{E_say}}cm\" y2=\"{{F_say}}cm\"/&gt;\n      &lt;line id=\"FG_sa\" class=\"line_SA\" x1=\"{{F_sax_}}cm\" x2=\"{{G_sax_}}cm\" y1=\"{{F_say}}cm\" y2=\"{{G_say}}cm\"/&gt;\n  &lt;/g&gt;\n\n  &lt;g id=\"Q4\"&gt;\n      &lt;line id=\"GH\" class=\"line_x\" x1=\"{{Gx_}}cm\" x2=\"{{Hx_}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Hy}}cm\"/&gt;\n      &lt;line id=\"HI\" class=\"line_x\" x1=\"{{Hx_}}cm\" x2=\"{{Ix_}}cm\" y1=\"{{Hy}}cm\" y2=\"{{Iy}}cm\"/&gt;\n      &lt;line id=\"IJ\" class=\"line_x\" x1=\"{{Ix_}}cm\" x2=\"{{Jx_}}cm\" y1=\"{{Iy}}cm\" y2=\"{{Jy}}cm\"/&gt;\n      &lt;line id=\"JK\" class=\"line_x\" x1=\"{{Jx_}}cm\" x2=\"{{Kx_}}cm\" y1=\"{{Jy}}cm\" y2=\"{{Ky}}cm\"/&gt;\n      &lt;line id=\"KL\" class=\"line_x\" x1=\"{{Kx_}}cm\" x2=\"{{Lx_}}cm\" y1=\"{{Ky}}cm\" y2=\"{{Ly}}cm\"/&gt;\n      &lt;line id=\"LM\" class=\"line_x\" x1=\"{{Lx_}}cm\" x2=\"{{Mx_}}cm\" y1=\"{{Ly}}cm\" y2=\"{{My}}cm\"/&gt;\n\n      &lt;line id=\"Symmetry_1\" class=\"red_dotted\" x1=\"{{Ax}}cm\" x2=\"{{Ax}}cm\" y1=\"{{Gy}}cm\" y2=\"{{My}}cm\"/&gt;\n      &lt;line id=\"Symmetry_2\" class=\"red_dotted\" x1=\"{{Ax_}}cm\" x2=\"{{Gx_}}cm\" y1=\"{{Gy}}cm\" y2=\"{{Gy}}cm\"/&gt;\n\n      &lt;line id=\"BC_sa\" class=\"line_SA\" x1=\"{{G_sax_}}cm\" x2=\"{{H_sax_}}cm\" y1=\"{{G_say}}cm\" y2=\"{{H_say}}cm\"/&gt;\n      &lt;line id=\"CD_sa\" class=\"line_SA\" x1=\"{{H_sax_}}cm\" x2=\"{{I_sax_}}cm\" y1=\"{{H_say}}cm\" y2=\"{{I_say}}cm\"/&gt;\n      &lt;line id=\"DE_sa\" class=\"line_SA\" x1=\"{{I_sax_}}cm\" x2=\"{{J_sax_}}cm\" y1=\"{{I_say}}cm\" y2=\"{{J_say}}cm\"/&gt;\n      &lt;line id=\"EF_sa\" class=\"line_SA\" x1=\"{{J_sax_}}cm\" x2=\"{{K_sax_}}cm\" y1=\"{{J_say}}cm\" y2=\"{{K_say}}cm\"/&gt;\n      &lt;line id=\"FG_sa\" class=\"line_SA\" x1=\"{{K_sax_}}cm\" x2=\"{{L_sax_}}cm\" y1=\"{{K_say}}cm\" y2=\"{{L_say}}cm\"/&gt;\n   &lt;/g&gt;\n&lt;/svg&gt;\n\n"]]}]]},"code":"\n// insert properties into template text. Properties in template like {{value1}}\n    function ApplyTemplate(template, properties) {\n        var returnValue = \"\";\n                        \n        var templateFragments = template.split(\"{{\");\n                        \n        returnValue += templateFragments[0];\n            for (var i = 1; i &lt; templateFragments.length; i++) {\n                var fragmentSections = templateFragments[i].split(\"}}\", 2);\n                returnValue += properties[fragmentSections[0]];\n                returnValue += fragmentSections[1];\n            }  \n        return returnValue;\n    }\n    function WriteFile(data, fileName) {\n        var out = \"\";\n        for (let i = 0; i &lt; data.length; i++) {\n            out += data[i];\n        }\n        //console.log(out);\n        var out = data;\n        var file = new Blob([out]);\n        var elem = window.document.createElement('a');\n        elem.href = window.URL.createObjectURL(file);\n        elem.download = fileName;\n        document.body.appendChild(elem);\n        elem.click();\n        document.body.removeChild(elem);\n    }\n\nclass bagPattern {\n    constructor(params) {\n    \n        this.params = params;\n        this.readInputs();\n        \n        //this.height = params.height;\n        //this.top_width = params.top_width;\n        //this.bottom_width = params.bottom_width; \n        //this.depth = params.depth;\n        //this.zip_offset = params.zip_offset;\n        //this.zip_reach = params.zip_reach;\n        //this.seam_allowance = params.seam_allowance;\n\n        \n        this.getPatternPoints();\n        this.getSeamAlowancePoints();\n        this.getCanvasSize();\n        this.writeToSvg();\n    }\n    \n    readInputs(){\n        const params = this.params;\n        this.height = params.height_input.value;\n        this.top_width = params.top_width_input.value;\n        this.bottom_width = params.bottom_width_input.value; \n        this.depth = params.depth_input.value;\n        this.zip_offset = params.zip_offset_input.value;\n        this.zip_reach = params.zip_reach_input.value;\n        this.seam_allowance = Number(params.seam_allowance_input.value);\n        \n        console.log(this.height, this.top_width, this.bottom_width);\n        console.log(this.depth, this.zip_offset, this.zip_reach);\n    }\n\n    // find points A -&gt; M without seam allowance\n    getPatternPoints(){\n        const height = this.height;\n        const top_width = this.top_width;\n        const bottom_width = this.bottom_width; \n        const depth = this.depth;\n        const zip_offset = this.zip_offset;\n        const zip_reach = this.zip_reach;\n\n        const d = Math.sqrt(height**2 + (top_width-bottom_width)**2); // distance from bottom corner to top corner\n\n        const points = {'A': [0, depth+height],\n                        'B': [top_width*0.5 + (zip_reach)*0.01*d, depth+height],\n                        'C': [top_width*0.5 + (zip_reach)*0.01*d, depth*0.5+height+ (0.01*zip_offset*0.5*depth)],\n                        'D': [top_width*0.5, depth*0.5+height+ (0.01*zip_offset*0.5*depth)],\n                        'E': [bottom_width*0.5, depth*0.5+ (0.01*zip_offset*0.5*depth)],\n                        'F': [bottom_width*0.5 + (100-zip_reach)*0.01*d, depth*0.5+(0.01*zip_offset*0.5*depth)],\n                        'G': [bottom_width*0.5 + (100-zip_reach)*0.01*d, 0],\n                        'H': [bottom_width*0.5 + (100-zip_reach)*0.01*d, -(0.5*depth - (0.01*zip_offset*0.5*depth))],\n                        'I': [bottom_width*0.5, -(0.5*depth - (0.01*zip_offset*0.5*depth))],\n                        'J': [top_width*0.5, -(0.5*depth - (0.01*zip_offset*0.5*depth)+height)] , \n                        'K': [top_width*0.5 + (zip_reach)*0.01*d, -(0.5*depth - (0.01*zip_offset*0.5*depth)+height)],\n                        'L': [top_width*0.5 + (zip_reach)*0.01*d, -(depth+height)],\n                        'M': [0, -(depth+height)]\n                        };\n        this.points = points;\n        //console.log('points', points);\n    }\n\n    // adds seam allowance to pattern points\n    getSeamAlowancePoints(){\n        console.log('sa',this.seam_allowance);\n        if (this.points === null){return}\n        if (this.seam_allowance == 0 | !this.seam_allowance) return\n        \n        const height = this.height;\n        const top_width = this.top_width;\n        const bottom_width = this.bottom_width; \n        const depth = this.depth;\n        const zip_offset = this.zip_offset;\n        const zip_reach = this.zip_reach;\n        const sa = this.seam_allowance;\n        \n        const d = Math.sqrt(height**2 + (top_width-bottom_width)**2); // distance from bottom corner to top corner\n\n        const points_sa = {'A_sa': [0, depth+height],\n                                'B_sa': [top_width*0.5 + (zip_reach)*0.01*d +sa, depth+height],\n                                'C_sa': [top_width*0.5 + (zip_reach)*0.01*d +sa, depth*0.5+height+ (0.01*zip_offset*0.5*depth) -sa],\n                                'D_sa': [top_width*0.5 +sa, depth*0.5+height+ (0.01*zip_offset*0.5*depth) -sa],\n                                'E_sa': [bottom_width*0.5 +sa, depth*0.5+ (0.01*zip_offset*0.5*depth) +sa],\n                                'F_sa': [bottom_width*0.5 + (100-zip_reach)*0.01*d +sa, depth*0.5+(0.01*zip_offset*0.5*depth)+sa],\n                                'G_sa': [bottom_width*0.5 + (100-zip_reach)*0.01*d +sa, 0],\n                                'H_sa': [bottom_width*0.5 + (100-zip_reach)*0.01*d+sa, -(0.5*depth - (0.01*zip_offset*0.5*depth))-sa],\n                                'I_sa': [bottom_width*0.5+sa, -(0.5*depth - (0.01*zip_offset*0.5*depth))-sa],\n                                'J_sa': [top_width*0.5+sa, -(0.5*depth - (0.01*zip_offset*0.5*depth)+height)+sa] , \n                                'K_sa': [top_width*0.5 + (zip_reach)*0.01*d+sa, -(0.5*depth - (0.01*zip_offset*0.5*depth)+height)+sa],\n                                'L_sa': [top_width*0.5 + (zip_reach)*0.01*d+sa, -(depth+height)],\n                                'M_sa': [0, -(depth+height)]\n                        };\n\n        //console.log(points_sa);\n        this.points_sa = points_sa;\n\n    }\n\n    getCanvasSize(){\n        const canvas_width = 2*Math.max(this.points['B'][0], this.points['F'][0] )+ 2 + this.seam_allowance;\n        const canvas_height = 2*(this.depth+ this.height)+ 2 + this.seam_allowance;\n        this.canvas_size = {canvas_height: canvas_height, canvas_width: canvas_width };\n    }\n\n    ConvertPointstoCanvasCoords(points){\n        var points_canvas = {};\n        const x_offset = this.canvas_size.canvas_width*0.5;\n        const y_offset = this.canvas_size.canvas_height*0.5;\n        const points_names = Object.keys(points); //['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];\n        for (var i = 0; i &lt; points_names.length; i++) { \n            const p = points_names[i];\n            points_canvas[p+'x'] = (points[p][0] + x_offset).toFixed(3); \n            points_canvas[p+'y'] = (-points[p][1] + y_offset).toFixed(3); // canvas coordinates have y running down page\n            points_canvas[p+'x_'] = (-points[p][0] + x_offset).toFixed(3); \n        }\n        \n        return points_canvas;\n    }\n\n    writeToSvg(){\n        const template = this.params.template;\n       \n        const a = this.canvas_size;\n        const b = this.ConvertPointstoCanvasCoords(this.points);\n        const c = this.ConvertPointstoCanvasCoords(this.points_sa);\n        var data = Object.assign(a,b,c);\n       \n        console.log(data);\n        const data_to_write = ApplyTemplate(template, data);\n        //console.log(data_to_write);\n\n        const filename = this.params.filename ?? 'pattern____.svg';\n        WriteFile(data_to_write, filename );\n    \n    }\n    \n    \n}\n\nlet count = 0\n\n// the callback function\nexport default (args, obj, data, context) =&gt; {\n    count += 1\n    console.log(`CustomJS was called ${count} times`)\n    const bag = new bagPattern(args.params);\n\n}"}}]]]},"label":"Generate pattern"}}]}}]}}]}}
+    </script>
+    <script>
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('e1efa900-16d1-45bc-b8f4-bee11657aaa8').textContent;
+              const render_items = [{"docid":"67b7d5ca-507c-4c59-a210-ffc40c0de361","roots":{"p1020":"aded6d96-bc88-4379-9f72-aa8f2d4af273"},"root_ids":["p1020"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>
